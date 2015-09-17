@@ -1,5 +1,5 @@
-title:            Hackxu's Blog
-description:       hackxu的前端技术博客,分享自己的技术心得,积累前段技能,汇聚前端之路的点点滴滴。
+title:            2shou's Blog
+description:       日常，积累，分享，copy
 disqus_shortname: hackxu
 reading_time:     true
 words_per_minute: 200
@@ -12,9 +12,9 @@ kurl1: "https://github.com/huangxok/mygitnote/tree/master/mbeui-react" # the bas
 kkkurl: www.hacke2.cn
 # Owner/author information
 owner:
-  name:           hackxu's blog
+  name:           2shou's blog
   avatar:         11323966.jpeg
-  bio:            hahahah
+  bio:            my own blog；
   email:          xhm520g@gmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:        
