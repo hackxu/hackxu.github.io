@@ -1,0 +1,443 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>HTML5和JavaScript Web应用开发读书笔记 &#8211; Hackxu's Blog</title>
+<meta name="description" content="《HTML5和JavaScript Web应用开发》主要介绍如何使用HTML5、JavaScript和最新的W3C规范构建可用于所有浏览器和设备的Web应用">
+<meta name="keywords" content="读书笔记">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5和JavaScript Web应用开发读书笔记">
+<meta property="og:description" content="《HTML5和JavaScript Web应用开发》主要介绍如何使用HTML5、JavaScript和最新的W3C规范构建可用于所有浏览器和设备的Web应用">
+<meta property="og:url" content="/html5-javascript-web-dep/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/html5-javascript-web-dep/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/html5-javascript-web-dep/" rel="bookmark" title="HTML5和JavaScript Web应用开发读书笔记">HTML5和JavaScript Web应用开发读书笔记</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-08-08T00:00:00-04:00">August 08, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~1 minute
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <figure>
+	<a href="http://img11.360buyimg.com/n0/g14/M07/17/04/rBEhV1JnaDgIAAAAAAIMoOWOE-gAAEhdAArwQ4AAgy4171.jpg">
+		<img src="http://img11.360buyimg.com/n0/g14/M07/17/04/rBEhV1JnaDgIAAAAAAIMoOWOE-gAAEhdAArwQ4AAgy4171.jpg" alt="home" />
+	</a>
+	<figcaption>HTML5和JavaScript Web应用开发</figcaption>
+</figure>
+
+<!--more-->
+
+<h1 id="section">第一章 客户端架构</h1>
+
+<ul>
+  <li>过去前端开发人员不用关心用户界面后的框架，从未先现在一样关注浏览器的性能</li>
+  <li>过去利用服务端模板和组件框架，如JAVA 的JSP,Velocity，前端只是套个模板而已</li>
+  <li>如今浏览器的性能已经得到了很大的提升，很多逻辑在客户端写，而后台仅仅提供Restful风格的接口</li>
+  <li>我们现在创建的不是网站，而是基于HTML5，CSS3和JavaScript的<strong>可靠地应用程序</strong></li>
+  <li>服务端模板引擎已经逐渐被JavaScript模板所取代</li>
+  <li>JavaScript API得到了更多硬件访问的支持，例如Geolocation、Web Workers</li>
+  <li>应该为当前的项目作出价值的决策，必须建立和维护编写、测试、和调试代码与选择框架的工作流</li>
+  <li><a href="https://github.com/lifesinger/lifesinger.github.com/issues/184">WEB开发模式已经逐渐在演化</a>，我们前端是新时代的先锋，抓住这个机会，创建性能强大，可伸缩的应用，利用WEB最新规范将其推进一步，变得更好。</li>
+</ul>
+
+<h1 id="web">第二章 移动WEB</h1>
+
+<ul>
+  <li>28%会使用移动设备来冲浪，但也有很大一部分人使用IE9以下的浏览器</li>
+  <li>维基百科 <a href="http://en.wikipedia.org/wiki/Comparison-of-layout_engines_(HTML5)">HTML5引擎对比页面</a></li>
+  <li>Webkit、Mobile Firefox、OperaMobile</li>
+  <li><a href="http://www.netmarketshare.com/browser-market-share.aspx?qprid=0&amp;qpcustomd=1">浏览器的市场份额</a>,<a href="http://caniuse.com">最新浏览器HTML5支持</a></li>
+  <li>优雅降级</li>
+  <li><a href="http://www.mobilexweb.com/emulators">移动设备模拟器列表</a></li>
+</ul>
+
+<h1 id="web-1">第三章 为移动WEB构造程序</h1>
+
+<ul>
+  <li>移动设备的成功依赖于两个因素：所以平台一致的外观；具有离线能力、UI动画和通过Rest风格或者WebSocket端点读取和发送数据的后端服务</li>
+  <li>有两个影响：CPU/GPU的速度和互联网速度</li>
+  <li><a href="http://mobiledesignpatterngallery.com/mobile-patterns.php">移动端的设计模式</a></li>
+  <li>要考虑的事情：硬件加速，内存分配和计算负担，电池的消耗与寿命，使用canvas代替image</li>
+  <li><a href="http://html5e.org/example">常见交互</a> 滑动，翻转，旋转transtion,transtform,transtlate.建议使用translate3d, 2d转换不支持GPU加速</li>
+  <li>使用Chrome查看每秒帧数FPS,查看是否加速用合成渲染边框</li>
+  <li><a href="https://github.com/html5e/slidfast/blob/master/slidfast.js#264">读取和缓冲，将AJAX缓冲到localStorage</a> 可存5M</li>
+  <li>IOS使用InnerHTML可能会出问题</li>
+  <li><a href="https://github.com/html5e/slidfast/blob/master/slidfast.js#L536">网络类型检测与处理</a></li>
+  <li>移动WEB常用于单页，可以平滑的向原生应用过渡，减少了请求次数</li>
+</ul>
+
+<h2 id="section-1">移动框架</h2>
+
+<ul>
+  <li>对触摸屏设备的优化，确保使用CSS3过渡处理动画</li>
+  <li>在所有主流平台浏览器上跨平台一致性</li>
+  <li>使用或封装最新的HTML5 CSS3标准</li>
+  <li>框架背后的强大开源社区</li>
+  <li>单页框架：<a href="http://jquerymobile.com">JQuery Mobile</a>, <a href="http://jqtouch.com">JQTouch</a></li>
+  <li>无页面结构框架：<a href="http://xuijs.com">xui</a></li>
+  <li>100%JavaScript驱动：<a href="http://www.sencha.com/products/touch">SenchaTouch</a>, <a href="http://www.sencha.com/products/touch">Wink Tooolkit</a>, <a href="http://the-m-project.net">The-M-Project</a></li>
+</ul>
+
+<h2 id="section-2">移动调试</h2>
+
+<ul>
+  <li><a href="http://people.apache.org/~pmuellr/weinre">weinre</a></li>
+  <li><a href="http://labs.adobe.com/technologies/shadow">Adobe Shadow</a></li>
+  <li><a href="http://www.opera.com/dragonfly/documentation/remote">Opera远程调试</a></li>
+</ul>
+
+<h1 id="web-2">第四章 桌面WEB</h1>
+
+<ul>
+  <li>由于AJAX的出现，在后台生成HTML的时代宣告结束</li>
+  <li>在客户端生成HTML降低了服务器的负载</li>
+  <li><a href="http://venturebeat.com/2011/08/16/linkedin-node">使用HTML5 + Node.js的例子，比前身快2~10倍</a></li>
+</ul>
+
+<h3 id="section-3">客户端优势</h3>
+
+<ul>
+  <li>更好的用户体验</li>
+  <li>网络带宽减少（降低成本）</li>
+  <li>具有可移植性（离线）</li>
+</ul>
+
+<h3 id="section-4">服务端优势</h3>
+
+<ul>
+  <li>更好的安全性</li>
+  <li>减少客户端的处理开销（移动端电池）</li>
+  <li>具有可扩展性（方便添加更多服务器）</li>
+  <li>性能检测可以使用UA或<a href="http://modernizr.com">Modernizr.js</a></li>
+</ul>
+
+<h2 id="section-5">特征检测</h2>
+
+<ul>
+  <li>原生特征检测一般使用创建一个元素看某一个方法是否存在</li>
+  <li>使用<a href="http://modernizr.com">Modernizr.js</a>可能会带来加载时间超过30MS，因为必须在DOM加载之前渲染各个值，</li>
+  <li>使用<a href="http://modernizr.com">Modernizr.js</a>不建议在生产环境中使用，但是可以在开发阶段使用它将各个浏览器的兼容性先调试好</li>
+  <li><a href="https://github.com/PaulKinlan/formfactor">FormFactory.js</a>可以检测不同类型的的设备,如移动设备版本、电视版本</li>
+</ul>
+
+<h2 id="ua">UA</h2>
+
+<ul>
+  <li>window.navigator.userAgent检测，但是不可靠</li>
+  <li>Google的一款UA解析器，基于JSON<a href="https://github.com/tobie/ua-parser">ua-parser</a>，另一款基于JS<a href="https://github.com/bestiejs/platform.js">platform.js</a></li>
+  <li>服务端检测，<a href="http://blog.mobileesp.com">MobileESP</a>用来检测userAgent的首标</li>
+</ul>
+
+<h2 id="section-6">压缩</h2>
+
+<ul>
+  <li>确保之压缩可压缩的内容，不要把资源浪费在可压可不压的内容上</li>
+  <li>未访问这选择正确的压缩方案</li>
+  <li>正确配置WEB服务器，将压缩的内容发给具体的有解压能力的客户端</li>
+  <li>如果一个大型页面(20k ~ 30K)压缩可能会加载CPU的负载，远大于SQL的执行，建议不压身</li>
+  <li>压缩的目标可以有HTML, CSS, JS, XML, JSON, HTC, TXT(Robots.txt)</li>
+  <li>可使用GZIP(减少70%，90%浏览器支持)或DEFLATE</li>
+  <li>压缩JS和CSS的工具有Closure Cpmpiler, Yahoo!YUI Compressor, JSMin, Packer,</li>
+  <li>前端构建(验证压缩合并等)<a href="https://github.com/gruntjs/grunt">grunt</a>, <a href="http://jawr.java.net">Jawr</a>, <a href="http://ziproxy.sourceforge.net">Ziproxy</a></li>
+</ul>
+
+<h2 id="javascript-mvc">JavaScript MVC框架</h2>
+
+<ul>
+  <li><a href="https://github.com/tastejs/todomvc">常见MV*框架的演示程序 TodoMVC</a></li>
+  <li><a href="https://github.com/jashkenas/backbone">Backbone</a> <a href="https://github.com/html5e/backbone-jax-cellar">书中的例子</a></li>
+  <li><a href="https://github.com/emberjs/ember.js">Ember</a> <a href="https://github.com/html5e/ember_data_example">书中的例子</a></li>
+  <li><a href="https://github.com/angular/angular.js">Angular</a> <a href="https://github.com/peiransun/angularjs-cn">AngularJS译本</a> <a href="https://github.com/html5e/angular-phonecat-mongodb-rest">书中的例子</a></li>
+  <li><a href="https://github.com/batmanjs/batman">Batman</a> <a href="https://github.com/html5e/batmanjs-address-book">书中的例子</a></li>
+  <li><a href="https://github.com/knockout/knockout">Knockout</a> <a href="https://github.com/html5e/knockout-rest">书中的例子</a></li>
+</ul>
+
+<h1 id="websocket">第五章 WebSocket</h1>
+
+<ul>
+  <li>从浏览器发出请求包含了header，无压缩的header可能有200b~2kb之前</li>
+  <li>WebSocket通过套接字的全双工同学，是客户端和服务器通信的高效手段</li>
+  <li>优雅降级是指在WebSocket不受支持时退回到就技术(Flash或长轮训)</li>
+  <li>NIO和线程直接的争论永无止境，一般的，高并发建议NIO，对计算有很大要求的用多线程</li>
+  <li>观察者模式，一般的有三个事件，OPEN, MESSSAGE, CLOSE</li>
+  <li><a href="https://github.com/html5e/HTML5-Mobile-WebSocket">使用Jetty服务器实现WebSocket的例子</a></li>
+  <li>不仅可以传递文本，JSON，而且可以传递二进制，用老发送流式音频，也可以提供画布（你画我猜）与实时的屏幕共享技术</li>
+  <li>使用代理技术如HAProxy让拆除服务器又不影响新的服务</li>
+</ul>
+
+<h3 id="section-7">优势</h3>
+
+<ul>
+  <li>没有HTTP Header</li>
+  <li>没有持续(Keep-alive)问题引起的时滞</li>
+  <li>低延时，更好地吞吐量和相应能力</li>
+  <li>对移动设备的电池有利</li>
+</ul>
+
+<h2 id="section-8">框架</h2>
+
+<ul>
+  <li><a href="https://github.com/vert-x/vert.x">Ver.x</a>是一个全异步，通用的JVM语言应用容器，是JVM版的Node.js</li>
+  <li><a href="http://socket.io">Socket.io</a>目标是在每种浏览器和移动设备实现应用，优雅降级</li>
+  <li><a href="https://github.com/Atmosphere">Atmosphere</a>可运行在任何基于JAVA的WEB框架</li>
+</ul>
+
+<h1 id="web-storage">第六章 Web Storage</h1>
+
+<ul>
+  <li>Cookie只有4K的存储量，而且每次都会带在HTTP请求头，与服务器共享</li>
+  <li>Web Storage有5M，但是存储数据若为UTF-16只有2.6M，IE和Firefox除外</li>
+  <li>Web Storage分为localStorage和sessionStorage(关闭浏览器或标签会消失)</li>
+  <li>读取或存储数据，是阻塞式的</li>
+  <li>常用API:length;key(n);getItem(key);setItem(key, value);removeItem(key);clear();</li>
+  <li><a href="http://jsperf.com/localstorage-key-vs-localstorage-key-vs-localstorage-ge">使用localStorage[name] = ‘hacke2’,localStorage.name = ‘hacke2’, localStorage.setItem(‘name’, ‘hacke2’)效率不同</a></li>
+  <li>同步问题使用StorageEventAPI解决</li>
+  <li>使用JSON在Web Storage上要进行编码和解码</li>
+  <li>无安全性可言</li>
+  <li>浏览器隐私模式下存储会出现异常</li>
+  <li>使用场景，存储一些Base64的图片，用户搜索的一些数据(神马搜索)等，QQ空间、Disqus评论将草稿存储在loaclStorage,自动登录，<a href="https://github.com/pamelafox/lscache">带有时间戳的缓存</a>等</li>
+  <li><a href="http://engineering.linkedin.com/mobile/linkedin-ipad-using-local-storage-snappy-mobile-apps">从客户端缓冲数据 允许离线且连接到网络时刷新数据</a></li>
+  <li><a href="http://blog.oxfordcc.co.uk/backbone-local-storage-and-server-synchronization">用Backbone进行数据库同步</a></li>
+  <li><a href="https://github.com/wojodesign/local-storage-js">在任何浏览器中使用Web Storage</a></li>
+</ul>
+
+<h2 id="section-9">框架</h2>
+
+<ul>
+  <li><a href="https://github.com/brianleroux/lawnchair">LawnChair</a>轻量级支持移动设备</li>
+  <li><a href="https://github.com/coresmart/persistencejs">persistence.js</a>用于服务端，集成Node.js和MySQL</li>
+</ul>
+
+<h1 id="geolocation">第七章 Geolocation</h1>
+
+<ul>
+  <li>提供对于宿主设备相关的地理位置信息的脚本访问，定位用户移动时跟踪器经纬度</li>
+  <li>地理防护：进入或离开一个位置进行提醒</li>
+  <li>地址匹配：利用Google将经纬度转为实际地址</li>
+  <li>一般跟踪：跟踪汽车，走路，跑步的距离</li>
+  <li>navigator.geolocation.getCurrentPosition(function(){})</li>
+  <li><a href="http://html5e.org/example/geo">防止激活Geolocation的一个变通方法</a></li>
+  <li>实例：用户跟踪，反向地址匹配</li>
+  <li><a href="http://bit.ly/Geolocation-API-Polyfill">Geolocation API跨浏览器支持</a></li>
+</ul>
+
+<h2 id="section-10">框架</h2>
+
+<ul>
+  <li><a href="code.google.com/p/geo-location-javascript">geo-loaction-javascript</a></li>
+  <li><a href="https://github.com/aFarkas/webshim">Webshims lib</a></li>
+</ul>
+
+<h1 id="device-orientation-api">第八章 Device Orientation API</h1>
+
+<ul>
+  <li>加速度计，陀螺仪，指南针</li>
+  <li><a href="http://www.html5e.org/example/orientation">实例：用设备的移动完成滚动</a></li>
+</ul>
+
+<h1 id="web-workers">第九章 Web Workers</h1>
+
+<ul>
+  <li>当WEB应用需要在JavaScript进行繁重的工作和后台处理的时候，推荐使用</li>
+  <li><a href="http://html5-shims.googlecode.com/svn/trunk/demo/workers.html">Web Worker API检测</a></li>
+  <li><a href="http://html5-demos.appspot.com/staic/workers/transferables/index.html">Web Worker 性能测试</a></li>
+  <li><a href="http://html5e.org/example/workers">实例：池化和并行作业</a> <a href="https://github.com/html5e/slidfast/blob/master/example/workers/index.html">对应的演示程序</a></li>
+  <li><a href="http://www.smartjava.org/examples/webworkers2">实例：处理图像</a></li>
+</ul>
+
+<p><strong>end from <a href="www.hacke2.cn">www.hacke2.cn</a></strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#读书笔记" title="Pages tagged 读书笔记" class="tag"><span class="term">读书笔记</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/how-i-m-using-es6-modules-in-production/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>

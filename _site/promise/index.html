@@ -1,0 +1,773 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>promise的分析 &#8211; Hackxu's Blog</title>
+<meta name="description" content="Promise">
+<meta name="keywords" content="Es6, Promise">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="promise的分析">
+<meta property="og:description" content="Promise">
+<meta property="og:url" content="/promise/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/promise/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/promise/" rel="bookmark" title="promise的分析">promise的分析</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-09-12T00:00:00-04:00">September 12, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~16 minutes
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1 id="section">简介</h1>
+
+<p>今天看群里有位知己上传了promise 所以我就为大家贡献出来了</p>
+
+<h2 id="promise">为什么需要promise？</h2>
+
+<p>你肯定听说过Javascript中的异步编程，但是它到底是什么呢?
+比如当你发生一个Ajax请求，你通常会提供一个回调函数，这个回调函数会在请求返回的时候被调用。但是你是否思考过你的回调函数在其他代码也需要运行的时候是如何被调用的呢？如果两个回调函数同时都要运行会怎样呢？JS引擎会如何处理这个问题呢？
+为了理解异步到底是什么，你首先需要理解一个问题：JS引擎是单线程的。这意味着在任何环境中，只有一段JS代码会被执行。但是什么叫一段JS代码呢？总的来说，每个函数是一个不可分割的片段或者代码块。当JS引擎开始执行一个函数(比如回调函数)时，它就会把这个函数执行完，也就是说只有执行完这段代码才会继续执行后面的代码。
+换句话说，JS引擎就像一个主题公园中的游乐项目，这个项目每次只能一个人玩儿，人们会排成一个长长的队。大家一个个上去玩儿，下来一个然后再上去一个。如果你要玩儿这个项目你只能在队尾排队等待。幸运的是，每个人都很快就下来了，所以这个队伍移动得很快。
+上面说的队伍在技术上被叫做事件轮询。它尽可能快的进行轮询，如果事件队列中有代码需要执行，它会让JS引擎执行这段代码，然后移到下一个需要执行的代码，或者等待新的代码进来。</p>
+
+<h1 id="section-1">并发</h1>
+<!--more-->
+<p>如果程序在一个时间只有一个任务在执行，这样明显是低效而且有限制性的。
+如果你点击一个按钮提交一个表单，然后你的鼠标就会被冻结并且你不能滚动页面，这个情况会持续几秒直到请求返回，这样肯定会带来很差的用户体验。
+这就是为什么真实的程序会有很多任务在运行而不是就只有一个任务，但是JS引擎是怎么在单线程的环境下实现的呢？
+你应该想到每个代码块运行只要很短的时间，通常不到1毫秒。你一眨眼的时间，JS引擎会执行上千百个这样的代码块。但是并不是所有的代码块都是为了执行同一个任务。比如，当你点击提交按钮之后，你也可以点击导航或者滚动页面等等。每个任务都会被分为很多个原子操作，执行这些原子操作会非常快。</p>
+
+<h1 id="section-2">代码</h1>
+
+<p>promise.js 源码如下</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span> <span class="nx">xmlns</span><span class="o">=</span><span class="s2">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;&lt;</span><span class="err">/title&gt;</span>
+<span class="o">&lt;</span><span class="err">/head&gt;</span>
+<span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <span class="cm">/*</span>
+<span class="cm">        Promise表示一个异步操作的最终结果。与Promise最主要的交互方法是通过将函数传入它的then方法从而获取得Promise最终的值或Promise最终最拒绝（reject）的原因。</span>
+
+<span class="cm">        1. 术语</span>
+
+<span class="cm">        promise是一个包含了兼容promise规范then方法的对象或函数，</span>
+<span class="cm">        thenable 是一个包含了then方法的对象或函数。</span>
+<span class="cm">        value 是任何Javascript值。 (包括 undefined, thenable, promise等).</span>
+<span class="cm">        exception 是由throw表达式抛出来的值。</span>
+<span class="cm">        reason 是一个用于描述Promise被拒绝原因的值。</span>
+
+<span class="cm">        2. 要求</span>
+
+<span class="cm">        2.1 Promise状态</span>
+
+<span class="cm">        一个Promise必须处在其中之一的状态：pending, fulfilled 或 rejected.</span>
+
+<span class="cm">        如果是pending状态,则promise：</span>
+
+<span class="cm">        可以转换到fulfilled或rejected状态。</span>
+<span class="cm">        如果是fulfilled状态,则promise：</span>
+
+<span class="cm">        不能转换成任何其它状态。</span>
+<span class="cm">        必须有一个值，且这个值不能被改变。</span>
+<span class="cm">        如果是rejected状态,则promise可以：</span>
+
+<span class="cm">        不能转换成任何其它状态。</span>
+<span class="cm">        必须有一个原因，且这个值不能被改变。</span>
+<span class="cm">        ”值不能被改变”指的是其identity不能被改变，而不是指其成员内容不能被改变。</span>
+
+<span class="cm">        2.2 then 方法</span>
+
+<span class="cm">        一个Promise必须提供一个then方法来获取其值或原因。</span>
+<span class="cm">        Promise的then方法接受两个参数：</span>
+
+<span class="cm">        promise.then(onFulfilled, onRejected)</span>
+<span class="cm">        onFulfilled 和 onRejected 都是可选参数：</span>
+
+<span class="cm">        如果onFulfilled不是一个函数，则忽略之。</span>
+<span class="cm">        如果onRejected不是一个函数，则忽略之。</span>
+<span class="cm">        如果onFulfilled是一个函数:</span>
+
+<span class="cm">        它必须在promise fulfilled后调用， 且promise的value为其第一个参数。</span>
+<span class="cm">        它不能在promise fulfilled前调用。</span>
+<span class="cm">        不能被多次调用。</span>
+<span class="cm">        如果onRejected是一个函数,</span>
+
+<span class="cm">        它必须在promise rejected后调用， 且promise的reason为其第一个参数。</span>
+<span class="cm">        它不能在promise rejected前调用。</span>
+<span class="cm">        不能被多次调用。</span>
+<span class="cm">        onFulfilled 和 onRejected 只允许在 execution context 栈仅包含平台代码时运行. [3.1].</span>
+<span class="cm">        onFulfilled 和 onRejected 必须被当做函数调用 (i.e. 即函数体内的 this 为undefined). [3.2]</span>
+<span class="cm">        对于一个promise，它的then方法可以调用多次.</span>
+
+<span class="cm">        当promise fulfilled后，所有onFulfilled都必须按照其注册顺序执行。</span>
+<span class="cm">        当promise rejected后，所有OnRejected都必须按照其注册顺序执行。</span>
+<span class="cm">        then 必须返回一个promise [3.3].</span>
+<span class="cm">        promise2 = promise1.then(onFulfilled, onRejected);</span>
+<span class="cm">        如果onFulfilled 或 onRejected 返回了值x, 则执行Promise 解析流程[[Resolve]](promise2, x).</span>
+<span class="cm">        如果onFulfilled 或 onRejected抛出了异常e, 则promise2应当以e为reason被拒绝。</span>
+<span class="cm">        如果 onFulfilled 不是一个函数且promise1已经fulfilled，则promise2必须以promise1的值fulfilled.</span>
+<span class="cm">        如果 OnReject 不是一个函数且promise1已经rejected, 则promise2必须以相同的reason被拒绝.</span>
+<span class="cm">        2.3 Promise解析过程</span>
+
+<span class="cm">        Promise解析过程 是以一个promise和一个值做为参数的抽象过程，可表示为[[Resolve]](promise, x). 过程如下；</span>
+
+<span class="cm">        如果promise 和 x 指向相同的值, 使用 TypeError做为原因将promise拒绝。</span>
+<span class="cm">        如果 x 是一个promise, 采用其状态 [3.4]:</span>
+
+<span class="cm">        如果x是pending状态，promise必须保持pending走到x fulfilled或rejected.</span>
+<span class="cm">        如果x是fulfilled状态，将x的值用于fulfill promise.</span>
+<span class="cm">        如果x是rejected状态, 将x的原因用于reject promise..</span>
+<span class="cm">        如果x是一个对象或一个函数：</span>
+
+<span class="cm">        将 then 赋为 x.then. [3.5]</span>
+<span class="cm">        如果在取x.then值时抛出了异常，则以这个异常做为原因将promise拒绝。</span>
+<span class="cm">        如果 then 是一个函数， 以x为this调用then函数， 且第一个参数是resolvePromise，第二个参数是rejectPromise，且：</span>
+
+<span class="cm">        当 resolvePromise 被以 y为参数调用, 执行 [[Resolve]](promise, y).</span>
+<span class="cm">        当 rejectPromise 被以 r 为参数调用, 则以r为原因将promise拒绝。</span>
+<span class="cm">        如果 resolvePromise 和 rejectPromise 都被调用了，或者被调用了多次，则只第一次有效，后面的忽略。</span>
+<span class="cm">        如果在调用then时抛出了异常，则：</span>
+
+<span class="cm">        如果 resolvePromise 或 rejectPromise 已经被调用了，则忽略它。</span>
+<span class="cm">        否则, 以e为reason将 promise 拒绝。</span>
+<span class="cm">        如果 then不是一个函数，则 以x为值fulfill promise。</span>
+<span class="cm">        如果 x 不是对象也不是函数，则以x为值 fulfill promise。</span>
+<span class="cm">        */</span>
+    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+    <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <span class="cm">/*</span>
+<span class="cm">        * 原型链拓展</span>
+<span class="cm">        */</span>
+        <span class="kd">var</span> <span class="nx">__extends</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">__extends</span><span class="p">)</span> <span class="o">||</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">b</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">p</span><span class="p">))</span> <span class="nx">d</span><span class="p">[</span><span class="nx">p</span><span class="p">]</span> <span class="o">=</span> <span class="nx">b</span><span class="p">[</span><span class="nx">p</span><span class="p">];</span>
+            <span class="kd">function</span> <span class="nx">__</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">d</span><span class="p">;</span> <span class="p">}</span>
+            <span class="nx">d</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">b</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">?</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="nx">__</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="k">new</span> <span class="nx">__</span><span class="p">());</span>
+        <span class="p">};</span>
+        <span class="c1">//参考：</span>
+        <span class="c1">//  Promises / A + 规范 http://promises-aplus.github.io/promises-spec/</span>
+        <span class="c1">//  Promises/A 规范 http://wiki.commonjs.org/wiki/Promises/A</span>
+        <span class="c1">//  Q https://github.com/kriskowal/q/wiki/API-Reference</span>
+        <span class="c1">//  Promise.TypeScript https://github.com/pragmatrix/Promise</span>
+        <span class="kd">var</span> <span class="nx">mbe_common</span><span class="p">;</span>
+        <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">mbe_common</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//Promise接口 具体的实现在 Deferred中</span>
+            <span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="kd">function</span> <span class="nx">Promise</span><span class="p">()</span> <span class="p">{</span>
+                <span class="p">}</span>
+                <span class="cm">/**</span>
+<span class="cm">                * onDone/onFail 应该返回值（或抛出异常），即不应返回 undefined，忘记返回值通常是 Bug，因此会在控制台给出警告。</span>
+<span class="cm">                * 如果确实不需要返回值，可返回 null。</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onDone</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span> <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * Promise的状态值 根据status来判断 Promise目前处于什么状态 即0 1 2 分别代表：未完成  完成  拒绝</span>
+<span class="cm">                * 这三种的状态的变化途径只有两个，且只能发生一次：从“未完成”到“已完成”，或者从“未完成”到“失败”。</span>
+<span class="cm">                * 即：0-&gt;1 或 0-&gt;2</span>
+<span class="cm">                * 一旦当前状态变为“已完成”或“失败”，就意味着不会再发生状态变化了</span>
+<span class="cm">                */</span>
+                <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="p">},</span>
+                    <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">configurable</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">});</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 请求完成时的数据 即如果status为1时,获取正常的数据 如果状态为2则为默认值undefined(PS：状态2,开发者可以自己处理,其实就是请求拒绝or失败时的返回值)</span>
+<span class="cm">                */</span>
+                <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span> <span class="p">},</span>
+                    <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">configurable</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">});</span>
+                <span class="cm">/**</span>
+<span class="cm">                * 用于完成的函数(异步请求成功时，用这个方法处理：成功的定义(请求成功就行))</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">done</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onDone</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 用于失败的函数(异步请求失败时，用这个方法处理)</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fail</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onFail</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 用于过程的函数(异步大文件时需要)</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onProgress</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 用于Promise队列（异步并行执行多个Promise请求)</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">when</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">promises</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">allDone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Deferred</span><span class="p">();</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">promises</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">allDone</span><span class="p">.</span><span class="nx">resolve</span><span class="p">([]);</span>
+                        <span class="k">return</span> <span class="nx">allDone</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="kd">var</span> <span class="nx">resolved</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">promises</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">promises</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+                            <span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="o">++</span><span class="nx">resolved</span><span class="p">;</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="nx">resolved</span> <span class="o">===</span> <span class="nx">promises</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;&amp;</span> <span class="nx">allDone</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span> <span class="p">{</span>
+                                    <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">promises</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span> <span class="p">});</span>
+                                    <span class="nx">allDone</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+                                <span class="p">}</span>
+                            <span class="p">})</span>
+                            <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="nx">allDone</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span>
+                                    <span class="nx">allDone</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span> <span class="c1">//TODO 此处i是无用的，怎么指示是哪一个promise的信息？</span>
+                            <span class="p">})</span>
+                            <span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="nx">allDone</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span> <span class="p">{</span>
+                                    <span class="nx">allDone</span><span class="p">.</span><span class="nx">notify</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span> <span class="c1">//TODO 此处i是无用的，怎么指示是哪一个promise的信息？</span>
+                                <span class="p">}</span>
+                            <span class="p">});</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="nx">allDone</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/**</span>
+<span class="cm">                 * 将其他库的 promise 实现包装成 mbe_common.Deferred 的实例。</span>
+<span class="cm">                 */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">wrap</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">promiseLike</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Deferred</span><span class="p">();</span>
+                    <span class="nx">promiseLike</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">ret</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+                    <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">ret</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">});</span>
+                    <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * Promise 的状态 0表示未完成 即异步请求的过程没有完成</span>
+<span class="cm">                * 如果Promise为这个状态那么它必须进入状态1或2</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="cm">/**</span>
+<span class="cm">                * Promise 的状态 0表示未完成 即异步请求的过程完成</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">RESOLVED</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="cm">/*</span>
+<span class="cm">                * Promise 的状态 2表示拒绝 即请求失败</span>
+<span class="cm">                */</span>
+                <span class="nx">Promise</span><span class="p">.</span><span class="nx">REJECTED</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="k">return</span> <span class="nx">Promise</span><span class="p">;</span>
+            <span class="p">})();</span>
+            <span class="cm">/*</span>
+<span class="cm">            * 将Promise接口公开</span>
+<span class="cm">            */</span>
+            <span class="nx">mbe_common</span><span class="p">.</span><span class="nx">Promise</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">;</span>
+
+            <span class="cm">/*</span>
+<span class="cm">            * Deferred接口继承Promise接口 即我们能够用到的实际中实现Promise异步功能的构造函数</span>
+<span class="cm">            */</span>
+            <span class="kd">var</span> <span class="nx">Deferred</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">_super</span><span class="p">)</span> <span class="p">{</span>
+                <span class="cm">/*</span>
+<span class="cm">                * js中的继承函数 连接 Deferred和Promise</span>
+<span class="cm">                */</span>
+                <span class="nx">__extends</span><span class="p">(</span><span class="nx">Deferred</span><span class="p">,</span> <span class="nx">_super</span><span class="p">);</span>
+                <span class="kd">function</span> <span class="nx">Deferred</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * call调用父类方法</span>
+<span class="cm">                    */</span>
+                    <span class="nx">_super</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 异步已完成函数的一个集合 为数组</span>
+<span class="cm">                    */</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 异步失败函数的一个集合 为数组</span>
+<span class="cm">                    */</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 异步请求过程函数的一个集合 为数组(大数据or大文件)</span>
+<span class="cm">                    */</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 默认状态为0 即未完成</span>
+<span class="cm">                    */</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">;</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 默认结果为undefined 避免undefined被污染用 void 0 代替</span>
+<span class="cm">                    */</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_result</span> <span class="o">=</span> <span class="k">void</span> <span class="mi">0</span><span class="p">;</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 此功能用于调试使用 控制台将Deferred._DEBUG设置为true</span>
+<span class="cm">                    */</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">Deferred</span><span class="p">.</span><span class="nx">_DEBUG</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">try</span> <span class="p">{</span>
+                            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Deferred constructor calling stack&#39;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">_stack</span> <span class="o">=</span> <span class="nx">e</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="cm">/*</span>
+<span class="cm">                * Promise的状态值 根据status来判断 Promise目前处于什么状态 即0 1 2 分别代表：未完成  完成  拒绝</span>
+<span class="cm">                * 这三种的状态的变化途径只有两个，且只能发生一次：从“未完成”到“已完成”，或者从“未完成”到“失败”。</span>
+<span class="cm">                * 即：0-&gt;1 或 0-&gt;2</span>
+<span class="cm">                * 一旦当前状态变为“已完成”或“失败”，就意味着不会再发生状态变化了 此种方式学名：存取器 不懂的百度 js存取器</span>
+<span class="cm">                */</span>
+                <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_status</span><span class="p">;</span> <span class="p">},</span>
+                    <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">configurable</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">});</span>
+                <span class="cm">/*</span>
+<span class="cm">               * 请求完成时的数据 即如果status为1时,获取正常的数据 如果状态为2则为默认值undefined(PS：状态2,开发者可以自己处理,其实就是请求拒绝or失败时的返回值)</span>
+<span class="cm">               */</span>
+                <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_result</span><span class="p">;</span> <span class="p">},</span>
+                    <span class="nx">enumerable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                    <span class="nx">configurable</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">});</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 处理异步请求状态的完成函数 即将status 由0-&gt;1</span>
+<span class="cm">                * 或 status为1 的情况</span>
+<span class="cm">                * 可能在then方法中调用Promise的done方法 或 单独调用</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">done</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onDone</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="cm">/*</span>
+<span class="cm">                    * 如果状态status为0 则将函数ondone放到_onDones中</span>
+<span class="cm">                    */</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">==</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span> <span class="o">||</span> <span class="p">[];</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">onDone</span><span class="p">);</span>
+                    <span class="p">}</span>
+                        <span class="cm">/* 如果状态status为0 则直接调用函数</span>
+<span class="cm">                        * _emitEventDirectly</span>
+<span class="cm">                        */</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">==</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">RESOLVED</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="cm">/*</span>
+<span class="cm">                        * 回调处理_result 即处理Promise返回都结果</span>
+<span class="cm">                        * 独立处理调用done函数时,处理Promise的结果</span>
+<span class="cm">                        */</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_emitEventDirectly</span><span class="p">(</span><span class="nx">onDone</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 处理异步请求状态的完成函数 即将status 由0-&gt;2</span>
+<span class="cm">                * 或 status为2 的情况</span>
+<span class="cm">                * 独立调用promise的done方法</span>
+<span class="cm">                * 方式与done方法一致</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fail</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onFail</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">==</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span> <span class="o">||</span> <span class="p">[];</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">onFail</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">==</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">REJECTED</span><span class="p">)</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_emitEventDirectly</span><span class="p">(</span><span class="nx">onFail</span><span class="p">);</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 处理异步请求状态的完成函数 即将status = 0</span>
+<span class="cm">                * 这个主要用处理大数据时，显示进度需要用到</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onProgress</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">==</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span> <span class="o">||</span> <span class="p">[];</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">onProgress</span><span class="p">);</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * then 方法为Promise的核心方法</span>
+<span class="cm">                * Promise必须提供一个then方法来获取其值或原因</span>
+<span class="cm">                * 参数1为完成函数  参数2为拒绝失败函数</span>
+<span class="cm">                * 中文说明可以参考                *</span>
+<span class="cm">                * http://segmentfault.com/a/1190000002452115</span>
+<span class="cm">                * 或github上的一些文章 关于Promise的实现。</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">onDone</span><span class="p">,</span> <span class="nx">onFail</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+                    <span class="kd">var</span> <span class="nx">def</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Deferred</span><span class="p">();</span>
+                    <span class="kd">var</span> <span class="nx">result</span><span class="p">;</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">onDone</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">try</span> <span class="p">{</span>
+                                <span class="nx">result</span> <span class="o">=</span> <span class="nx">onDone</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                                <span class="nx">_this</span><span class="p">.</span><span class="nx">_warnReturnValue</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="k">instanceof</span> <span class="nx">Promise</span><span class="p">)</span> <span class="p">{</span>
+                                    <span class="nx">def</span><span class="p">.</span><span class="nx">_bindTo</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                                    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+                                <span class="p">}</span>
+                                <span class="k">else</span>
+                                    <span class="nx">def</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                            <span class="p">}</span>
+                            <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">def</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="k">else</span>
+                            <span class="nx">def</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                    <span class="p">});</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">onFail</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">try</span> <span class="p">{</span>
+                                <span class="nx">result</span> <span class="o">=</span> <span class="nx">onFail</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                                <span class="nx">_this</span><span class="p">.</span><span class="nx">_warnReturnValue</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="k">instanceof</span> <span class="nx">Promise</span><span class="p">)</span> <span class="p">{</span>
+                                    <span class="nx">def</span><span class="p">.</span><span class="nx">_bindTo</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                                    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+                                <span class="p">}</span>
+                                <span class="k">else</span> <span class="p">{</span>
+                                    <span class="nx">def</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+                                <span class="p">}</span>
+                            <span class="p">}</span>
+                            <span class="k">catch</span> <span class="p">(</span><span class="nx">err2</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">def</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">err2</span><span class="p">);</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="k">else</span>
+                            <span class="nx">def</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+                    <span class="p">});</span>
+                    <span class="k">return</span> <span class="nx">def</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 异步请求完成时对数据进行处理的函数</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">data</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt; Deferred.resolve() received undefined, likely a bug&#39;</span><span class="p">);</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_emitEvent</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">RESOLVED</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 异步请求拒绝失败时进行处理的函数</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">Deferred</span><span class="p">.</span><span class="nx">_DEBUG</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">try</span> <span class="p">{</span>
+                            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Deferred.reject calling stack&#39;</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">logw</span><span class="p">(</span><span class="s1">&#39;rejected: Defered.constructor stack:\n&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_stack</span><span class="p">[</span><span class="s1">&#39;stack&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">_stack</span><span class="p">)</span>
+                                <span class="o">+</span> <span class="s1">&#39;\nrejected: Defered.rejected stack:\n&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">e</span><span class="p">[</span><span class="s1">&#39;stack&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="nx">e</span><span class="p">)</span>
+                                <span class="o">+</span> <span class="s1">&#39;\nrejected: reason stack:\n&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">err</span><span class="p">[</span><span class="s1">&#39;stack&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="nx">err</span><span class="p">));</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_emitEvent</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">REJECTED</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 显示通知</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">notify</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_emitEvent</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 显示处理结果的函数</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_emitEvent</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">!=</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">UNFULFILLED</span> <span class="o">&amp;&amp;</span> <span class="nx">Deferred</span><span class="p">.</span><span class="nx">_DEBUG</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="c1">// ES6 Promise 在重复完成 promise 的时候并不会出错，所以此处也只在 DEBUG 模式给出警告</span>
+                        <span class="c1">// throw Error(&#39;fulfilled&#39;);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;Promise: try to fulfil a fulfilled.&#39;</span><span class="p">);</span>
+                        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="kd">var</span> <span class="nx">callbacks</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">RESOLVED</span><span class="p">)</span>
+                        <span class="nx">callbacks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span><span class="p">;</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">status</span> <span class="o">===</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">REJECTED</span><span class="p">)</span>
+                        <span class="nx">callbacks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span><span class="p">;</span>
+                    <span class="k">else</span>
+                        <span class="nx">callbacks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_status</span> <span class="o">=</span> <span class="nx">status</span><span class="p">;</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_result</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_onDones</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onFails</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_onProgresses</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+                    <span class="p">}</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">callbacks</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">callbacks</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="k">try</span> <span class="p">{</span>
+                                <span class="nx">callbacks</span><span class="p">[</span><span class="nx">i</span><span class="p">](</span><span class="nx">data</span><span class="p">);</span>
+                            <span class="p">}</span>
+                            <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="k">this</span><span class="p">.</span><span class="nx">_log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * 绑定函数,将传入的对象绑定 Promise的一些方法</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_bindTo</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">p</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+                        <span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reject</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+                        <span class="p">.</span><span class="nx">progress</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">notify</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+                <span class="p">};</span>
+                <span class="cm">/*</span>
+<span class="cm">                * Promise异步请求完成或失败时的回调函数</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_emitEventDirectly</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">callback</span><span class="p">)</span>
+                        <span class="k">return</span><span class="p">;</span>
+                    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <span class="k">try</span> <span class="p">{</span>
+                            <span class="nx">callback</span><span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">_result</span><span class="p">);</span>
+                        <span class="p">}</span>
+                        <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">_this</span><span class="p">.</span><span class="nx">_log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/*弹出警告信息*/</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_log</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">stack</span> <span class="o">||</span> <span class="nx">err</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/*请求信息*/</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_warnReturnValue</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">===</span> <span class="s1">&#39;undefined&#39;</span><span class="p">)</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt; Promise.then(): onDone/onFail returns undefined, likely a bug&#39;</span><span class="p">);</span>
+                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="nx">value</span> <span class="k">instanceof</span> <span class="nx">Promise</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">value</span><span class="p">.</span><span class="nx">then</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt; Promise.then(): onDone/onFail returns a promise-like object, likely a bug. Consider Promise.wrap().&#39;</span><span class="p">);</span>
+                <span class="p">};</span>
+                <span class="cm">/**</span>
+<span class="cm">                * 将 _DEBUG 设置为 true 时，_stack.stack 将反调用映构造器时的调用栈，从而有助于调试。</span>
+<span class="cm">                */</span>
+                <span class="nx">Deferred</span><span class="p">.</span><span class="nx">_DEBUG</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="k">return</span> <span class="nx">Deferred</span><span class="p">;</span>
+            <span class="p">})(</span><span class="nx">Promise</span><span class="p">);</span>
+            <span class="nx">mbe_common</span><span class="p">.</span><span class="nx">Deferred</span> <span class="o">=</span> <span class="nx">Deferred</span><span class="p">;</span>
+        <span class="p">})(</span><span class="nx">mbe_common</span> <span class="o">||</span> <span class="p">(</span><span class="nx">mbe_common</span> <span class="o">=</span> <span class="p">{}));</span>
+    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="err">/body&gt;</span>
+<span class="o">&lt;</span><span class="err">/html&gt;</span></code></pre></div>
+
+<p>创建index.html</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://libs.baidu.com/jquery/1.9.0/jquery.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/socket.io/socket.io.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="kd">var</span> <span class="nx">iosocket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+
+            <span class="nx">iosocket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#incomingChatMessages&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;已连接！&lt;/li&gt;&#39;</span><span class="p">));</span>
+
+                <span class="nx">iosocket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#incomingChatMessages&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">message</span><span class="p">));</span>
+                <span class="p">});</span>
+                <span class="nx">iosocket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#incomingChatMessages&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;失去连接&lt;/li&gt;&#39;</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+
+            <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#outgoingChatMessage&#39;</span><span class="p">).</span><span class="nx">keypress</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">which</span> <span class="o">==</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+                    <span class="nx">iosocket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#outgoingChatMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">());</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#incomingChatMessages&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#outgoingChatMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">()));</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#outgoingChatMessage&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+控制台:<span class="ni">&amp;nbsp;</span><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&quot;incomingChatMessages&quot;</span><span class="nt">&gt;&lt;/ul&gt;</span>
+<span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;outgoingChatMessage&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
+
+<p><strong>文章来自 <a href="https://github.com/huangxok"> https://github.com/huangxok</a></strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#Es6" title="Pages tagged Es6" class="tag"><span class="term">Es6</span></a><a href="/tags/#Promise" title="Pages tagged Promise" class="tag"><span class="term">Promise</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/nodeJS-char/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/nodeJS-char/" title="基于Node.js + socket.io实现WebSocket的聊天DEMO">基于Node.js + socket.io实现WebSocket的聊天DEMO</a></h4>
+        <span>Published on August 19, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>

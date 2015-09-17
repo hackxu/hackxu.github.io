@@ -1,0 +1,343 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>CSS居中完全解决方案 &#8211; Hackxu's Blog</title>
+<meta name="description" content="各种情景下的CSS水平垂直居中">
+<meta name="keywords" content="CSS">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS居中完全解决方案">
+<meta property="og:description" content="各种情景下的CSS水平垂直居中">
+<meta property="og:url" content="/div-center/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/div-center/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/div-center/" rel="bookmark" title="CSS居中完全解决方案">CSS居中完全解决方案</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-08-17T00:00:00-04:00">August 17, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~1 minute
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <blockquote>
+  <p>上次面试面试官问到了，问了个定宽局中和不定宽局中，下来我把所有有关CSS居中都总结了一下</p>
+</blockquote>
+
+<h1 id="section">水平居中</h1>
+
+<h2 id="section-1">行内元素</h2>
+
+<p>把行内元素嵌套在一个DIV中，并且在DIV中设置以下样式</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">a</span><span class="p">{</span>
+		<span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="section-2">块级元素</h2>
+
+<p>对于定宽的块级元素，我们要设置起margin-top,margin-right 为auto</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.center</span><span class="p">{</span>
+		<span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="inline-block">多个块级元素(inline-block)</h2>
+
+<p>多个块级元素，我们将其display设置为inline-block；然后将父级元素设置一下属性</p>
+
+<!--more-->
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+		<span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="flex">多个块级元素(flex)</h2>
+
+<p>设置需要水平居中的块状元素的父元素display为flex ，并且justify-content属性为center即可</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">body</span><span class="p">{</span>
+	  <span class="k">display</span><span class="o">:</span> <span class="n">flex</span><span class="p">;</span>
+	  <span class="k">justify</span><span class="o">-</span><span class="k">content</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h1 id="section-3">垂直居中</h1>
+
+<h2 id="section-4">单行 行内元素</h2>
+
+<p>将行内元素的height和line-height设置为一致即可</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">a</span><span class="p">{</span>
+	  <span class="k">height</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+	  <span class="k">line-height</span><span class="o">:</span><span class="m">200px</span><span class="p">;</span>  
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="section-5">多行 行内元素</h2>
+
+<p>如果行内元素文字过多产生多行，则在父级元素设置display: table-cell;vertical-align:middle;</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.container</span><span class="p">{</span>
+		<span class="k">width</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+		<span class="k">height</span><span class="o">:</span> <span class="m">300px</span><span class="p">;</span>
+		<span class="k">display</span><span class="o">:</span> <span class="k">table-cell</span><span class="p">;</span>
+		<span class="k">vertical-align</span><span class="o">:</span><span class="k">middle</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="section-6">已知高度的块级元素</h2>
+
+<p>将块级元素设置绝对定位，top为50%，margin-top:-height/2</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+	  <span class="k">height</span><span class="o">:</span> <span class="m">100px</span><span class="p">;</span>
+	  <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+	  <span class="k">top</span><span class="o">:</span> <span class="m">50%</span><span class="p">;</span>
+	  <span class="k">margin-top</span><span class="o">:</span> <span class="m">-50px</span><span class="p">;</span>
+	  <span class="k">padding</span><span class="o">:</span><span class="m">0</span><span class="p">;</span> 
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="section-7">未知高度的块级元素</h2>
+
+<p>使用CSS translate,将块级元素设置绝对定位，top为50%，transform: translateY(-50%);</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+	  <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+	  <span class="k">top</span><span class="o">:</span> <span class="m">50%</span><span class="p">;</span>
+	  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span><span class="n">translateY</span><span class="p">(</span><span class="m">-50%</span><span class="p">);</span>
+	  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span><span class="n">translateY</span><span class="p">(</span><span class="m">-50%</span><span class="p">);</span>
+	  <span class="n">transform</span><span class="o">:</span> <span class="n">translateY</span><span class="p">(</span><span class="m">-50%</span><span class="p">);</span>
+	  <span class="k">padding</span><span class="o">:</span><span class="m">0</span><span class="p">;</span> 
+	<span class="p">}</span></code></pre></div>
+
+<h1 id="section-8">水平垂直居中</h1>
+
+<h2 id="section-9">已知高度、宽度的元素</h2>
+
+<p>将块级元素设置绝对定位，top为50%，left:50%;margin-top:-height/2;margin-left:-width/2</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+		<span class="k">width</span><span class="o">:</span> <span class="m">150px</span><span class="p">;</span>
+		<span class="k">height</span><span class="o">:</span> <span class="m">150px</span><span class="p">;</span>
+		<span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+		<span class="k">top</span><span class="o">:</span> <span class="m">50%</span><span class="p">;</span>
+		<span class="k">left</span><span class="o">:</span> <span class="m">50%</span><span class="p">;</span>
+		<span class="k">margin-top</span><span class="o">:</span> <span class="m">-75px</span><span class="p">;</span>
+		<span class="k">margin-left</span><span class="o">:</span> <span class="m">-75px</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="flex-1">已知高度、宽度的元素(flex)</h2>
+
+<p>给父级使用flex布局</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+		<span class="k">display</span><span class="o">:</span> <span class="n">flex</span><span class="p">;</span>
+		<span class="k">justify</span><span class="o">-</span><span class="k">content</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+		<span class="n">align</span><span class="o">-</span><span class="n">items</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+	<span class="p">}</span></code></pre></div>
+
+<h2 id="section-10">未知高度、宽度的元素</h2>
+
+<p>使用CSS translate</p>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+	    <span class="k">position</span><span class="o">:</span><span class="k">absolute</span><span class="p">;</span>
+		<span class="k">top</span><span class="o">:</span><span class="m">50%</span><span class="p">;</span>
+		<span class="k">left</span><span class="o">:</span><span class="m">50%</span><span class="p">;</span>
+		<span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span><span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="o">,-</span><span class="m">50%</span><span class="p">);</span>
+		<span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="n">transform</span><span class="o">:</span><span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="o">,-</span><span class="m">50%</span><span class="p">);</span>
+		<span class="n">transform</span><span class="o">:</span><span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="o">,-</span><span class="m">50%</span><span class="p">);</span>
+	<span class="p">}</span></code></pre></div>
+
+<p><strong>文章来自 <a href="www.hacke2.cn">www.hacke2.cn</a></strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#CSS" title="Pages tagged CSS" class="tag"><span class="term">CSS</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/html5-javascript-web-dep/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>

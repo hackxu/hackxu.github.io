@@ -1,0 +1,351 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>逐帧动画两种实现方式 &#8211; Hackxu's Blog</title>
+<meta name="description" content="分别用JS/CSS实现逐帧动画">
+<meta name="keywords" content="CSS3">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逐帧动画两种实现方式">
+<meta property="og:description" content="分别用JS/CSS实现逐帧动画">
+<meta property="og:url" content="/frame-animation/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/frame-animation/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/frame-animation/" rel="bookmark" title="逐帧动画两种实现方式">逐帧动画两种实现方式</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-08-08T00:00:00-04:00">August 08, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~3 minutes
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <blockquote>
+  <p>由于使用gif，我们不能将其控制（播放、暂停、播放次数），所以逐帧动画一般使用代码实现，下面我们来介绍两种方法。</p>
+</blockquote>
+
+<p><strong>原理就是时时刻刻改变他的<code>position</code></strong>。</p>
+
+<!--more-->
+
+<h2 id="js">1.JS逐帧动画</h2>
+
+<p>JS就是调用定时器，这边有一个小技巧：直接改变一个经测试会有闪烁的情况，再加一个重叠替换运动</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/milopu/1/embed?html,css,js,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>每次改变位置，效率不高。简单封装了一段JS插件</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">;(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">requestAnimFrame</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">opt</span><span class="p">){</span>
+            <span class="kd">var</span> <span class="nx">defined</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">top</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="nx">left</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="nx">position</span><span class="o">:</span><span class="s1">&#39;absolute&#39;</span>
+            <span class="p">},</span>
+            <span class="nx">option</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">defined</span><span class="p">,</span> <span class="nx">opt</span><span class="p">),</span>
+            <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">curAnim</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+            <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+            <span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">isRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">maybeAddPx</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">==</span> <span class="s2">&quot;number&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="nx">value</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span> <span class="o">:</span> <span class="nx">value</span><span class="p">;</span>
+            <span class="p">},</span>
+            <span class="cm">/**</span>
+<span class="cm">             * 标准化requestAnimFrame</span>
+<span class="cm">             * @param  {[type]} ){                         return  window.requestAnimationFrame       ||                    window.webkitRequestAnimationFrame ||                    window.mozRequestAnimationFrame    ||                    function( callback ){                    window.setTimeout(callback, 1000 / 60);                    };        })( [description]</span>
+<span class="cm">             * @return {[type]}     [description]</span>
+<span class="cm">             */</span>
+            <span class="nx">requestAnimationFrame</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">option</span><span class="p">.</span><span class="nx">time</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span>  <span class="kd">function</span><span class="p">(</span> <span class="nx">callback</span> <span class="p">){</span>
+                            <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">option</span><span class="p">.</span><span class="nx">time</span><span class="p">);</span>
+                        <span class="p">};</span>
+                <span class="p">}</span>
+                <span class="k">return</span>  <span class="nb">window</span><span class="p">.</span><span class="nx">requestAnimationFrame</span>       <span class="o">||</span>
+                        <span class="nb">window</span><span class="p">.</span><span class="nx">webkitRequestAnimationFrame</span> <span class="o">||</span>
+                        <span class="nb">window</span><span class="p">.</span><span class="nx">mozRequestAnimationFrame</span>    <span class="o">||</span>
+                        <span class="kd">function</span><span class="p">(</span> <span class="nx">callback</span> <span class="p">){</span>
+                            <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span><span class="p">);</span>
+                        <span class="p">};</span>
+            <span class="p">})(),</span>
+            <span class="c1">//添加两张图，解决一轮动画结束闪屏问题</span>
+            <span class="nx">anim_1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">,</span> <span class="p">{</span>
+                <span class="nx">css</span> <span class="o">:</span>  <span class="p">{</span>
+                     <span class="nx">background</span> <span class="o">:</span> <span class="s1">&#39;url(&#39;</span> <span class="o">+</span> <span class="nx">option</span><span class="p">.</span><span class="nx">url</span> <span class="o">+</span> <span class="s1">&#39;) no-repeat scroll 0px 0px transparent&#39;</span>
+                     
+                <span class="p">}</span>
+
+            <span class="p">}),</span>
+            <span class="nx">anim_2</span> <span class="o">=</span> <span class="nx">anim_1</span><span class="p">.</span><span class="nx">clone</span><span class="p">(),</span>
+            <span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">anim_1</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">anim_2</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="s1">&#39;relative&#39;</span><span class="p">);</span>
+            <span class="p">},</span>
+            <span class="nx">width</span> <span class="o">=</span> <span class="nx">option</span><span class="p">.</span><span class="nx">length</span> <span class="o">/</span> <span class="nx">option</span><span class="p">.</span><span class="nx">step</span><span class="p">,</span>
+            <span class="nx">go</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&gt;</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+                    <span class="nx">flag</span> <span class="o">?</span> <span class="p">(</span><span class="nx">curAnim</span> <span class="o">=</span> <span class="nx">anim_1</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="nx">curAnim</span> <span class="o">=</span> <span class="nx">anim_2</span><span class="p">);</span>
+
+                    <span class="nx">flag</span> <span class="o">=</span> <span class="o">!</span><span class="nx">flag</span><span class="p">;</span>
+                    <span class="nx">curAnim</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundPosition</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">*</span> <span class="nx">width</span> <span class="o">+</span> <span class="s2">&quot;px 0px&quot;</span><span class="p">;</span>
+                    <span class="c1">//使用Zepto方法会闪动，具体看博文：http://www.hacke2.cn/anmi-strange-problem/</span>
+                    <span class="c1">//curAnim.css(&#39;background-position&#39; , &#39;-&#39; + i * 75 + &#39;px 0px&#39;)</span>
+                    <span class="nx">self</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">curAnim</span><span class="p">);</span>
+
+                    <span class="nx">i</span><span class="o">++</span><span class="p">;</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isRunning</span><span class="p">)</span>
+                    <span class="nx">isRunning</span> <span class="o">&amp;&amp;</span> <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">go</span><span class="p">)</span>      
+            <span class="p">};</span>
+
+            <span class="nx">init</span><span class="p">();</span>
+
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="nx">run</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">isRunning</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+                    <span class="nx">requestAnimationFrame</span><span class="p">(</span><span class="nx">go</span><span class="p">);</span>
+
+                <span class="p">},</span>
+                <span class="nx">stop</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">isRunning</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="p">},</span>
+                <span class="nx">isRunning</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nx">isRunning</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">};</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+
+        
+<span class="p">})(</span><span class="nx">Zepto</span><span class="p">);</span></code></pre></div>
+
+<p>调用的时候这样调用:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">ra</span> <span class="o">=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#divParent&#39;</span><span class="p">).</span><span class="nx">requestAnimFrame</span><span class="p">({</span>
+        <span class="nx">step</span> <span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="nx">url</span> <span class="o">:</span> <span class="s1">&#39;img/1-slow.png&#39;</span><span class="p">,</span>
+        <span class="nx">length</span> <span class="o">:</span> <span class="mi">6000</span><span class="p">,</span>
+        <span class="nx">time</span> <span class="o">:</span> <span class="mi">12</span>
+    <span class="p">});</span>
+<span class="nx">ra</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span></code></pre></div>
+
+<p>自己完成两个DOM的COPY，html结果如下：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;divParent&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span></code></pre></div>
+
+<p>提供了几个接口：run、stop、isRunning</p>
+
+<h2 id="css3">2.CSS3逐帧动画</h2>
+
+<p>CSS3方式实现当时比用JS效率高很多，许多优化在浏览器底层完成。之前为什么不用有两点考虑：</p>
+
+<p>1.兼容性</p>
+
+<p>2.每一帧都要手动去写</p>
+
+<p>但是在移动端CSS3已经支持很好了，但每一帧都得自己写太痛苦，还好在一篇博客看到有一个step函数供我们调用 <a href="https://idiotwu.me/css3-running-animation/">https://idiotwu.me/css3-running-animation/</a>。我们将它整合一下：</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/qejavi/4/embed?html,output">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>怎么样，是不是很简单，中间的帧数让浏览器给我们计算就可以了。</p>
+
+<p>，关于<code>step</code>，这边有篇文章介绍的很详细<a href="https://idiotwu.me/understanding-css3-timing-function-steps/">CSS3 timing-function: steps() 详解</a></p>
+
+<p><strong>文章来自 <a href="www.hacke2.cn">www.hacke2.cn</a></strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#CSS3" title="Pages tagged CSS3" class="tag"><span class="term">CSS3</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/css-multi-row-overflow/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>第一次接触ng todoList，产出物 &#8211; Hackxu's Blog</title>
+<meta name="description" content="ng">
+<meta name="keywords" content="ng, todolist">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一次接触ng todoList，产出物">
+<meta property="og:description" content="ng">
+<meta property="og:url" content="/ng-todoList/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/ng-todoList/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/ng-todoList/" rel="bookmark" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-09-13T00:00:00-04:00">September 13, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~2 minutes
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1 id="section">简介</h1>
+
+<p>听说ng很屌 ，今天看了看，顺便写了个简单的web 应用程序</p>
+
+<h2 id="ng">为什么需要ng？</h2>
+
+<p>类似 Backbone 或者 JavaScriptMVC，anguar是一个快速的前端开发解决方案。没有其它的插件或者架构足以开发数据驱动的web应用。下面列出了AnguarJS的一些特性：</p>
+
+<p>方便的REST： RESTful逐渐成为了标准的服务器和客户端沟通的方式。使用一行javascript代码，你就可以快速的从服务器端得到数据。AugularJS将这些变成了JS对象，作为Model，遵循MVVM(model view view-model)设计模式。</p>
+
+<p>MVVM救星：Model将和ViewModel互动（通过$scope对象），将监听Model的变化。这些可以通过View来发送和渲染，由HTML来展示你的代码。View可以通过$routeProvider对象来支配，所以你可以深度的链接和组织你的View和Controller，将他们变成导航URL。AngualrJS同时提供了无状态的Controller，可以用来初始化和控制$scope对象。
+<!--more--></p>
+
+<p>数据绑定和依赖注入：在MVVM设计模式中的任何东西无论发生任何事情都自动的和UI通信。这帮助我们去除了wrapper，getter/setter方法或者class定义。AngularJS将帮助我们处理所有的这些内容，所以你可以处理数据像处理基本javascript数据类型，例如，数组一样简单。当然你也可以通过自定义处理复杂数据。正因为所有事情的发生都是自动的，所以你不必调用一个main()来执行你的代码，而是通过依赖关系来驱动。</p>
+
+<p>可扩展的HTML：大多数的网站都是使用非语义的&lt;div&gt;标签来搭建的。你需要自己在CSS的class中定义相关的DOM层次结构。而使用AngularJS，你可以操作XML一样操作HTML，给你无穷的方式来完成标签和属性定义。AngularJS通过自己的编译器和directives来完成相关的设置。</p>
+
+<p>使用HTML模板：如果你曾经使用过Mustache ， Hogan.js，或者handlerbars的话，你就可以快速的理解AngularJS的模板引擎语法，应为它是纯HTML的。AngularJS通过DOM浏览来完成此类功能，使用上面提到的directives。模板被作为DOM元素传递到Angular的编译器中，可以被扩展，执行或者重用。这很关键，这样一来你就拥有了DOM组件，而非字符串，允许你直接的操作扩展DOM树。</p>
+
+<p>企业级别的测试：AnguarJS并不依赖于第三方的插件或者是框架，包括测试。如果你熟悉QUnit, Mocha 或者 Jasmine的话，那么对于理解Angular的单元测试和Scenario Runner来说就非常简单。</p>
+
+<p>以上的这些基本的原则能够帮助知道你使用Angular来创建高效性能可维护的代码。只要你有代码保存数据，AnguarJS会帮助你处理所有的重量级内容，提供一个富客户端的超棒体验！</p>
+
+<h1 id="section-1">问题</h1>
+<p>表示开始的时候还遇到一些问题，提交两次相同的内容ng就会报错，百度了一下是这样写的 <code>track By $index </code>，结果一直报错 最后谷歌了一下<code> By</code>的<code>B</code>其实是小写的。。不是故意黑百度的，
+缺少的js和css请自行下载引用更换路径
+# 代码</p>
+
+<p>源码如下</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">html</span> <span class="nx">lang</span><span class="o">=</span><span class="s2">&quot;en&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">app</span><span class="o">=</span><span class="s2">&quot;todoList&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">http</span><span class="o">-</span><span class="nx">equiv</span><span class="o">=</span><span class="s2">&quot;X-UA-Compatible&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;IE=edge,chrome=1&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;format-detection&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;telephone=no&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;viewport&quot;</span> <span class="nx">content</span><span class="o">=</span><span class="s2">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">title</span><span class="o">&gt;</span><span class="nx">TODOLIST</span><span class="o">&lt;</span><span class="err">/title&gt;</span>
+    <span class="c">&lt;!--</span> <span class="nx">Latest</span> <span class="nx">compiled</span> <span class="nx">and</span> <span class="nx">minified</span> <span class="nx">CSS</span> <span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="nx">style</span><span class="o">&gt;</span>
+        <span class="p">.</span><span class="nx">list</span><span class="o">-</span><span class="nx">group</span> <span class="nx">li</span><span class="p">{</span> <span class="nx">display</span><span class="o">:</span> <span class="nx">block</span><span class="p">;</span> <span class="nx">overflow</span><span class="o">:</span> <span class="nx">hidden</span><span class="p">;}</span>
+        <span class="p">.</span><span class="nx">right</span><span class="p">{</span>
+            <span class="kr">float</span><span class="o">:</span> <span class="nx">right</span><span class="p">;</span>
+            <span class="nx">margin</span><span class="o">-</span><span class="nx">right</span><span class="o">:</span> <span class="mi">10</span><span class="nx">px</span><span class="p">;</span> <span class="nx">display</span><span class="o">:</span> <span class="nx">block</span><span class="p">;</span> <span class="nx">cursor</span><span class="o">:</span> <span class="nx">pointer</span><span class="p">;}</span>
+    <span class="o">&lt;</span><span class="err">/style&gt;</span>
+    <span class="o">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="err">/head&gt;</span>
+<span class="o">&lt;</span><span class="nx">body</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">controller</span><span class="o">=</span><span class="s2">&quot;TaskCtrl&quot;</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;padding: 10px;&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;input-group&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="s2">&quot;task&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;input-group-btn&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;btn btn-default&quot;</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">click</span><span class="o">=</span><span class="s2">&quot;add()&quot;</span><span class="o">&gt;</span><span class="err">提交</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+    <span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="o">&lt;</span><span class="nx">h4</span> <span class="nx">ng</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">&quot;tasks.length&gt;0&quot;</span><span class="o">&gt;</span><span class="err">任务列表</span><span class="o">&lt;</span><span class="err">/h4&gt;</span>
+<span class="o">&lt;</span><span class="nx">ul</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;list-group&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">repeat</span><span class="o">=</span><span class="s2">&quot;item in tasks track by $index&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;list-group-item&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">click</span><span class="o">=</span><span class="s2">&quot;tasks.splice($index,1)&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="o">&gt;</span><span class="err">删除</span><span class="o">&lt;</span><span class="err">/a&gt;</span>
+    <span class="o">&lt;</span><span class="err">/li&gt;</span>
+<span class="o">&lt;</span><span class="err">/ul&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;../js/angular.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;todoList&#39;</span><span class="p">,[])</span>
+            <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;TaskCtrl&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">){</span>
+                <span class="nx">$scope</span><span class="p">.</span><span class="nx">task</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+                <span class="nx">$scope</span><span class="p">.</span><span class="nx">tasks</span><span class="o">=</span><span class="p">[];</span>
+                <span class="nx">$scope</span><span class="p">.</span><span class="nx">add</span><span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+                    <span class="nx">$scope</span><span class="p">.</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">task</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="err">/body&gt;</span>
+<span class="o">&lt;</span><span class="err">/html&gt;</span></code></pre></div>
+
+<p><strong>本文原创</strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#ng" title="Pages tagged ng" class="tag"><span class="term">ng</span></a><a href="/tags/#todolist" title="Pages tagged todolist" class="tag"><span class="term">todolist</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/promise/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/nodeJS-char/" title="基于Node.js + socket.io实现WebSocket的聊天DEMO">基于Node.js + socket.io实现WebSocket的聊天DEMO</a></h4>
+        <span>Published on August 19, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>

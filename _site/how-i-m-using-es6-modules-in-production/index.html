@@ -1,0 +1,315 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>译-我是怎么在项目中使用ES6模块化的 &#8211; Hackxu's Blog</title>
+<meta name="description" content="如何让ES6 module 和 AMD module一起工作">
+<meta name="keywords" content="ES6">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="译-我是怎么在项目中使用ES6模块化的">
+<meta property="og:description" content="如何让ES6 module 和 AMD module一起工作">
+<meta property="og:url" content="/how-i-m-using-es6-modules-in-production/">
+<meta property="og:site_name" content="Hackxu's Blog">
+
+
+
+
+
+<link rel="canonical" href="/how-i-m-using-es6-modules-in-production/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<!-- Webfonts -->
+<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
+					<h4>hackxu's blog</h4>
+					<p>hahahah</p>
+				</li>
+				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
+				<li>
+					<a href="mailto:xhm520g@gmail.com"><i class="fa fa-fw fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				
+				
+				<li>
+					<a href="http://github.com/hackxu"><i class="fa fa-fw fa-github"></i> GitHub</a>
+				</li>
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		
+	    
+	        
+	    
+<!-- 	    <li><a href="/theme-setup/" >Theme Setup</a></li>
+ -->	  
+	    
+	        
+	        
+<!-- 	    <li><a href="http://mademistakes.com" target="_blank">External Link</a></li>
+ -->	  
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/how-i-m-using-es6-modules-in-production/" rel="bookmark" title="译-我是怎么在项目中使用ES6模块化的">译-我是怎么在项目中使用ES6模块化的</a></h1>
+        
+        <h2><span class="entry-date date published"><time datetime="2015-08-08T00:00:00-04:00">August 08, 2015</time></span></h2>
+        
+        <p class="entry-reading-time">
+          <i class="fa fa-clock-o"></i>
+          
+          Reading time ~2 minutes
+        </p><!-- /.entry-reading-time -->
+        
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <blockquote>
+  <p>http://jsrocks.org/2015/05/how-i-m-using-es6-modules-in-production/ 原文链接</p>
+</blockquote>
+
+<p>我使用 <a href="/categories/modules/">ES6 modules</a>工作已经有一段时间了，今天我就向大家分享下我是怎么使用ES6 moudule的。</p>
+
+<!--more-->
+
+<p>首先，向大家介绍一下Babel ，<a href="https://babeljs.io/">Babel</a>是用来JS转译的整合工具，它是一个非常活跃的项目，而且它几乎覆盖了所有现代JavaScript特征。（注：JS转译（Javascript Transpiler）请自行谷歌）
+Babel完美支持模块化，你可以自己决定你代码的风格，你可以使用AMD,Common,UMD这些规范，而且你甚至能自定义模块规范。</p>
+
+<p>在我的公司里，我们开发了一个基于AMD modules规范的框架（当然尚未开源），用来构建我们的应用。
+相信我：对于开发大型的应用，使用AMD规范仍然是一个很好很好的解决方案。我们不能再把所有js代码反正一个文件里，这样是不行的。
+悲剧的是我们现在很多些应用的解决方案是类似于<a href="http://webpack.github.io/">Webpack</a>,要想迁移到AMD modules可不是那么容易，而我们公司关于模块化的解决方案是很实用的（尚未开源）。</p>
+
+<p>注：在本文中“解决方案”都是指JS模块化解决方案。
+微模块策略
+这个策略对我来说很有用。
+正如我上文说的那样，我们最终产出模块必须要要是AMD module，但是当某一个AMD模块需要依赖其他模块时，我叫那个模块（AMD模块依赖的模块）叫做微模块。
+微模块并不会被应用的每个模块都用到，但是利用它能帮助我们组织代码。
+以下代码演示了我们怎么使用微模块：</p>
+
+<h2 id="section">微模块策略</h2>
+
+<p>这个策略对我来说很有用。
+正如我上文说的那样，我们最终产出模块必须要要是AMD module，但是当某一个AMD模块需要依赖其他模块时，我叫那个模块（AMD模块依赖的模块）叫做微模块。
+微模块并不会被应用的每个模块都用到，但是利用它能帮助我们组织代码。
+以下代码演示了我们怎么使用微模块：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span><span class="p">;</span><span class="c1">//导入ES6模块</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">globalpkg</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./config&#39;</span><span class="p">;</span><span class="c1">//动态注入ES6模块参数</span>
+<span class="kr">import</span> <span class="nx">factory</span> <span class="nx">from</span> <span class="s1">&#39;./factory&#39;</span><span class="p">;</span>
+ 
+ <span class="nx">zaz</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">pkg</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>      
+   <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">dynamic</span><span class="p">.</span><span class="nx">globalpkg</span> <span class="o">=</span> <span class="nx">pkg</span><span class="p">;</span>
+    <span class="nx">pkg</span><span class="p">.</span><span class="nx">require</span><span class="p">([</span><span class="s1">&#39;modFactory&#39;</span><span class="p">],</span> <span class="p">(</span><span class="nx">modFactory</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">modFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">pkg</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">deepMerge</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">_static</span><span class="p">,</span> <span class="nx">factory</span><span class="p">));</span>     
+    <span class="p">});</span> 
+ <span class="p">});</span></code></pre></div>
+
+<p>我们在代码的顶部导入了一些模块，并且在我们的AMD模块里还使用了这些导入的模块。在其他的应用中并不会用到这些ES6模块，但是使用了这些微模块后，编译后产生的最终源码有更高的可读性。</p>
+
+<p>这是config模块的代码：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">githubURL</span> <span class="o">=</span> <span class="s2">&quot;OUR GITHUB URL HERE&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">staticServer</span> <span class="o">=</span> <span class="s2">&quot;http://s1.trrsf.com&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">testsPath</span> <span class="o">=</span> <span class="err">`</span><span class="nx">zaz</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">type</span><span class="p">}</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="o">/</span><span class="nx">tests</span><span class="o">/</span><span class="nx">index</span><span class="p">.</span><span class="nx">htm</span><span class="o">?</span><span class="nx">zaz</span><span class="p">[</span><span class="nx">env</span><span class="p">]</span><span class="o">=</span><span class="nx">tests</span><span class="err">`</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;stalker&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">type</span> <span class="o">=</span> <span class="s2">&quot;mod&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">version</span> <span class="o">=</span> <span class="s2">&quot;0.0.1&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="s2">&quot;ok&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">description</span> <span class="o">=</span> <span class="s2">&quot;JavaScript API to deal with user data&quot;</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">globalpkg</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// default export </span>
+<span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>     
+  <span class="nx">_static</span><span class="o">:</span> <span class="p">{</span>         
+  <span class="nx">name</span><span class="p">,</span>         
+  <span class="nx">version</span><span class="p">,</span>         
+  <span class="nx">state</span><span class="p">,</span>         
+  <span class="nx">description</span><span class="p">,</span>         
+  <span class="nx">docs</span><span class="o">:</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">githubURL</span><span class="p">}</span><span class="o">/</span><span class="nx">pages</span><span class="o">/</span><span class="nx">terra</span><span class="o">/</span><span class="nx">zaz</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">type</span><span class="p">}</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="err">`</span><span class="p">,</span>         
+  <span class="nx">source</span><span class="o">:</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">githubURL</span><span class="p">}</span><span class="o">/</span><span class="nx">Terra</span><span class="o">/</span><span class="nx">zaz</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">type</span><span class="p">}</span><span class="o">-</span><span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="err">`</span><span class="p">,</span>         
+  <span class="nx">tests</span><span class="o">:</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">staticServer</span><span class="p">}</span><span class="o">/</span><span class="nx">fe</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">testsPath</span><span class="p">}</span><span class="err">`</span><span class="p">,</span>         
+  <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mod.wilson&#39;</span><span class="p">]</span>     
+  <span class="p">}</span>
+<span class="p">};</span> 
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">config</span><span class="p">;</span></code></pre></div>
+
+<p>这是项目的源码结构：</p>
+
+<pre><code>└── src
+    ├── _js
+        ├── config.js
+        ├── environment.js
+      ├── helpers.js
+      ├── factory.js
+      ├── methods.js
+        └── mod-stalker.js
+        └── mod-stalker.js
+</code></pre>
+
+<p>我把一些AMD模块的逻辑放进了微小的ES6模块里。
+这对于构建处理是很简单的：Babel转译ES6的Javascript代码为ES5的代码；使用导入CommonJS模块的方式来导入微模块。最后用<a href="http://browserify.org/">Browserify</a> 打包代码。
+哈哈！最终生成的代码符合AMD模块规范了。</p>
+
+<h2 id="section-1">下一步</h2>
+
+<p>Sourcemaps比起Browserify来说，Sourcemaps不能很好的处理这个编译的流程。
+也许这里能有更好的实现方式。
+我们现在可以开始使用ES6新特征和模块化来重构我们的框架了。
+你甚至可以自己实现模块加载规范给你的程序，但是我认为这可能不是一个好方法，有可能你会需要完全重写现有的模块加载系统。</p>
+
+<h2 id="section-2">结论</h2>
+
+<p>现在模块规范已经完成了，而且是非常成熟和有效的。
+然而，web浏览器至今没有提供js模块加载的原生API,所有像AMD或者CommonJS就显得格外重要了。
+现在我们已经体会到ES6模块语法的好处了，可以让我们的代码拥有更高的可读性和简洁性。
+现有的工具，比如Babel和Browserify能减少我们开发的痛苦，相信在不久的将来等ES6普及后，我们就能简化js开发流程，这样就能舍弃这些构建打包工具了。</p>
+
+<p><strong>文章来自 <a href="www.hacke2.cn">www.hacke2.cn</a></strong></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/tags/#ES6" title="Pages tagged ES6" class="tag"><span class="term">ES6</span></a></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <div class="read-more">
+<!--   
+ -->    <div class="read-more-header">
+      <a href="/frame-animation/" class="read-more-btn">Read More</a>
+    </div><!-- /.read-more-header -->
+<!--     <div class="read-more-content">
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
+    </div><!-- /.read-more-content -->
+<!--   -->
+  <div class="read-more-list">
+    
+      <div class="list-item">
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
+      </div><!-- /.list-item -->
+    
+      <div class="list-item">
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
+      </div><!-- /.list-item -->
+    
+  </div><!-- /.read-more-list -->
+</div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+
+<!-- /*<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fc974ee5652cef49d5c272e5cae5a0d20' type='text/javascript'%3E%3C/script%3E"));
+</script>
+*/ -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'hackxu'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	        
+
+</body>
+</html>
