@@ -5,9 +5,9 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>小tip:CSS3控制多行溢出 &#8211; 2shou's Blog</title>
-<meta name="description" content="打破CSS只能控制单行溢出的历史观点">
-<meta name="keywords" content="CSS3">
+<title>node express初学 &#8211; 2shou's Blog</title>
+<meta name="description" content="node">
+<meta name="keywords" content="node, express">
 
 
 
@@ -24,16 +24,16 @@
 
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="小tip:CSS3控制多行溢出">
-<meta property="og:description" content="打破CSS只能控制单行溢出的历史观点">
-<meta property="og:url" content="/css-multi-row-overflow/">
+<meta property="og:title" content="node express初学">
+<meta property="og:description" content="node">
+<meta property="og:url" content="/node-express/">
 <meta property="og:site_name" content="2shou's Blog">
 
 
 
 
 
-<link rel="canonical" href="/css-multi-row-overflow/">
+<link rel="canonical" href="/node-express/">
 <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="2shou's Blog Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -134,9 +134,9 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="/css-multi-row-overflow/" rel="bookmark" title="小tip:CSS3控制多行溢出">小tip:CSS3控制多行溢出</a></h1>
+          <h1 class="entry-title"><a href="/node-express/" rel="bookmark" title="node express初学">node express初学</a></h1>
         
-        <h2><span class="entry-date date published"><time datetime="2015-08-08T00:00:00-04:00">August 08, 2015</time></span></h2>
+        <h2><span class="entry-date date published"><time datetime="2015-09-25T00:00:00-04:00">September 25, 2015</time></span></h2>
         
         <p class="entry-reading-time">
           <i class="fa fa-clock-o"></i>
@@ -147,63 +147,65 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <blockquote>
-  <p>以前做项目，对文字溢出只能进行单行溢出的控制：</p>
-</blockquote>
+      <h2 id="node">还是先来扯扯node的优缺点吧</h2>
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">white-space</span><span class="o">:</span> <span class="nt">nowrap</span><span class="o">;</span>  
-<span class="nt">overflow</span><span class="o">:</span> <span class="nt">hidden</span><span class="o">;</span>  
-<span class="nt">text-overflow</span><span class="o">:</span> <span class="nt">ellipsis</span><span class="o">;</span></code></pre></div>
+<h3 id="section">处理高并发场景性能更高</h3>
 
-<p>对于多行则无能为力，只能用渲染端来控制，这样有一个很大的问题：<strong>无法达到响应式</strong></p>
+<p>在用 http://socket.io 之前，推送服务是用 ajax polling 做的。我们用 Tornado 和 Node.js 做过两个版本的推送服务。在当时的测试环境下，Node.js 的 CPU 时间是 Tornado 的三分之一，内存使用是 Tornado 的一半，代码行数只有 Tornado 的三分之一（Node.js 版是用 coffee 写的）。后来我们使用了 http://socket.io，CPU 开销进一步降低。</p>
 
-<p>但是在WebKit浏览器或移动端（绝大部分是WebKit内核的浏览器）的页面实现比较简单，可以直接使用WebKit的CSS扩展属性(WebKit是私有属性)-webkit-line-clamp，这个历史问题也就不攻自破了,对应代码：</p>
+<h3 id="section-1">函数式编程非常适合写异步回调链</h3>
+
+<p>用 Node.js 配合 CoffeeScript 写异步操作链非常便利，相比之下 Tornado 无论是写命名函数的回调，还是 yield 一个 Task 都没那么自然。</p>
 
 <!--more-->
 
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="k">@media</span> <span class="nt">all</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">-webkit-transform-3d</span><span class="o">)</span><span class="p">{</span>
-    <span class="nc">.3-line</span><span class="p">{</span>
-       <span class="k">white-space</span><span class="o">:</span><span class="k">normal</span><span class="p">;</span>  
-       <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">line</span><span class="o">-</span><span class="n">clamp</span><span class="o">:</span><span class="m">3</span><span class="p">;</span>  <span class="o">//</span><span class="err">表限制三行</span>
-       <span class="k">display</span><span class="o">:-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>  
-       <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
-       <span class="k">text</span><span class="o">-</span><span class="k">overflow</span><span class="o">:</span><span class="n">ellipsis</span><span class="p">;</span>
-       <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="n">orient</span><span class="o">:</span> <span class="n">vertical</span><span class="p">;</span> 
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<h3 id="section-2">缺点：</h3>
 
-<p>对应SCSS代码如下：</p>
+<ol>
+  <li>大量匿名函数使异常栈变得不好看。</li>
+  <li>无法以 request 为单位 catch 异常，必须确保不要在不 catch 异常的第三方库的回调里的抛异常，这在一个异步操作链条里是一件比较麻烦的事。解决方法之一是对那些不 catch 异常的第三方库做一些封装，把所有的异常变成事件，改成 on(‘error’) 形式的 API。</li>
+</ol>
 
-<div class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/**</span>
-<span class="cm">  * multi lines overflow</span>
-<span class="cm">  * @param {Number} $lineCount - count to display</span>
-<span class="cm">  */</span>
-<span class="k">@mixin</span><span class="nf"> multiline-ellipsis</span><span class="p">(</span><span class="nv">$lineCount</span><span class="p">){</span>
-    <span class="k">@media</span> <span class="nt">all</span> <span class="nt">and</span> <span class="o">(</span><span class="nt">-webkit-transform-3d</span><span class="o">)</span><span class="p">{</span>
-        <span class="k">&amp;</span><span class="p">{</span>
-           <span class="nt">white-space</span><span class="nd">:normal</span><span class="o">;</span>  
-           <span class="nt">-webkit-line-clamp</span><span class="nd">:</span><span class="err">$</span><span class="nt">lineCount</span><span class="o">;</span>  
-           <span class="nt">display</span><span class="nd">:-webkit-box</span><span class="o">;</span>  
-           <span class="nt">overflow</span><span class="nd">:</span> <span class="nt">hidden</span><span class="o">;</span>
-           <span class="nt">text-overflow</span><span class="nd">:ellipsis</span><span class="o">;</span>
-           <span class="nt">-webkit-box-orient</span><span class="nd">:</span> <span class="nt">vertical</span><span class="o">;</span> 
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<h2 id="node-1">node的安装</h2>
 
-<p>加这段媒体查询的原因是考虑只在webkit下用。直接引用这个代码片段传入参数即可。</p>
+<p>node可以去官网下载安装包这个就不多说了，安装完node之后可以通过 <code>node -v</code> 查看当前版本号。安装express的话，如何是4.0的版本最好使用 <code>npm install -g express-generator</code> 安装。
+这里的 <code>-g</code> 是全局global的意思，一般来说还是全局安装的好，因为安装的时候已经帮你配置好了系统的环境变量。</p>
 
-<p>对于过渡方案，有以下几种：</p>
+<h2 id="packagejson">关于package.json</h2>
 
-<p>1.使用伪元素生成一个“…”（最好半透明背景），父元素定高<code>overflow:hidden</code></p>
+<p>package.json的代码通常是这样的</p>
 
-<p>2.以上功能由JS来代替<a href="https://github.com/josephschmitt/Clamp.js">Clamp.js</a></p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>  
+    <span class="err">“</span><span class="nx">name</span><span class="err">”</span><span class="o">:</span> <span class="err">“</span><span class="nx">helloexpress</span><span class="err">”</span><span class="p">,</span>  
+    <span class="err">“</span><span class="nx">description</span><span class="err">”</span><span class="o">:</span> <span class="err">“</span><span class="nx">hello</span> <span class="nx">express</span><span class="o">!</span><span class="err">”</span><span class="p">,</span>  
+    <span class="err">“</span><span class="nx">version</span><span class="err">”</span><span class="o">:</span> <span class="err">“</span><span class="mf">0.0</span><span class="p">.</span><span class="mi">1</span><span class="err">”</span><span class="p">,</span>  
+    <span class="err">“</span><span class="kr">private</span><span class="err">”</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="err">“</span><span class="nx">dependencies</span><span class="err">”</span><span class="o">:</span> <span class="p">{</span>  
+      <span class="err">“</span><span class="nx">express</span><span class="err">”</span><span class="o">:</span> <span class="err">“</span><span class="mi">4</span><span class="p">.</span><span class="nx">x</span><span class="err">”</span>  
+    <span class="p">}</span>  
+  <span class="p">}</span></code></pre></div>
 
-<p><strong>文章来自 <a href="www.hacke2.cn">www.hacke2.cn</a></strong></p>
+<p>看起来跟普通的json没什么区别，但是在这里区别却很大。 dependencies是所需要安装的node模块，通常在项目根目录建立，也可以通过命令 <code>npm init</code>来建立。当有package.json存在的时候，就可以通过<code>npm install</code>来安装所需要的依赖模块。是不是很方便呢！</p>
+
+<h2 id="appjs">重头戏app.js</h2>
+
+<p>直接贴代码</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="err">‘</span><span class="nx">express</span><span class="err">’</span><span class="p">);</span>  
+ <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>  
+    
+ <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="err">‘</span><span class="o">/</span><span class="err">’</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>  
+   <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="err">‘</span><span class="nx">hello</span> <span class="nx">express</span><span class="err">’</span><span class="p">);</span>  
+ <span class="p">});</span>  
+    
+ <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span></code></pre></div>
+
+<p>如上所示就是app.js的代码了，当执行<code>node app.js</code>的时候，俺们就能在浏览器的地址栏输入http://127.0.0.1:3000/ 来看到我们的效果 hello express，这是node的重点，这段代码
+就是在起了一个本地服务器，hah，（为什么不是传统的hello world呢，因为俺不识字）</p>
 
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="/tags/#CSS3" title="Pages tagged CSS3" class="tag">CSS3</a></span>
-        <span><a href="/css-multi-row-overflow/" rel="bookmark" title="小tip:CSS3控制多行溢出">小tip:CSS3控制多行溢出</a> was published on <span class="entry-date date published updated"><time datetime="2015-08-08T00:00:00-04:00">August 08, 2015</time></span></span>
+        <span class="entry-tags"><a href="/tags/#node" title="Pages tagged node" class="tag">node</a><a href="/tags/#express" title="Pages tagged express" class="tag">express</a></span>
+        <span><a href="/node-express/" rel="bookmark" title="node express初学">node express初学</a> was published on <span class="entry-date date published updated"><time datetime="2015-09-25T00:00:00-04:00">September 25, 2015</time></span></span>
         
         <span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       <!--  
@@ -225,23 +227,23 @@
     <div class="read-more">
 <!--   
  -->    <div class="read-more-header">
-      <a href="/anmi-strange-problem/" class="read-more-btn">Read More</a>
+      <a href="/mui-react/" class="read-more-btn">Read More</a>
     </div><!-- /.read-more-header -->
 <!--     <div class="read-more-content">
-      <h3><a href="/node-express/" title="node express初学">node express初学</a></h3>
-      <p>node <a href="/node-express/">Continue reading</a></p>
+      <h3><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h3>
+      <p>react <a href="/mui-react/">Continue reading</a></p>
     </div><!-- /.read-more-content -->
 <!--   -->
   <div class="read-more-list">
     
       <div class="list-item">
-        <h4><a href="/mui-react/" title="react mbe_ui浅析">react mbe_ui浅析</a></h4>
-        <span>Published on September 16, 2015</span>
+        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
+        <span>Published on September 13, 2015</span>
       </div><!-- /.list-item -->
     
       <div class="list-item">
-        <h4><a href="/ng-todoList/" title="第一次接触ng todoList，产出物">第一次接触ng todoList，产出物</a></h4>
-        <span>Published on September 13, 2015</span>
+        <h4><a href="/promise/" title="promise的分析">promise的分析</a></h4>
+        <span>Published on September 12, 2015</span>
       </div><!-- /.list-item -->
     
   </div><!-- /.read-more-list -->

@@ -1,16 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">Hackxu's Blog</title>
+<title type="text">2shou's Blog</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-09-17T08:56:03-04:00</updated>
+<updated>2015-09-25T07:59:53-04:00</updated>
 <id>/</id>
 <author>
-  <name>hackxu's blog</name>
+  <name>2shou's blog</name>
   <uri>/</uri>
   <email>xhm520g@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[node express初学]]></title>
+ <link rel="alternate" type="text/html" href="/node-express/" />
+  <id>/node-express</id>
+  <published>2015-09-25T00:00:00-04:00</published>
+  <updated>2015-09-25T00:00:00-04:00</updated>
+  <author>
+    <name>2shou's blog</name>
+    <uri></uri>
+    <email>xhm520g@gmail.com</email>
+  </author>
+  <content type="html">
+    &lt;h2 id=&quot;node&quot;&gt;还是先来扯扯node的优缺点吧&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;处理高并发场景性能更高&lt;/h3&gt;
+
+&lt;p&gt;在用 http://socket.io 之前，推送服务是用 ajax polling 做的。我们用 Tornado 和 Node.js 做过两个版本的推送服务。在当时的测试环境下，Node.js 的 CPU 时间是 Tornado 的三分之一，内存使用是 Tornado 的一半，代码行数只有 Tornado 的三分之一（Node.js 版是用 coffee 写的）。后来我们使用了 http://socket.io，CPU 开销进一步降低。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;函数式编程非常适合写异步回调链&lt;/h3&gt;
+
+&lt;p&gt;用 Node.js 配合 CoffeeScript 写异步操作链非常便利，相比之下 Tornado 无论是写命名函数的回调，还是 yield 一个 Task 都没那么自然。&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;缺点：&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;大量匿名函数使异常栈变得不好看。&lt;/li&gt;
+  &lt;li&gt;无法以 request 为单位 catch 异常，必须确保不要在不 catch 异常的第三方库的回调里的抛异常，这在一个异步操作链条里是一件比较麻烦的事。解决方法之一是对那些不 catch 异常的第三方库做一些封装，把所有的异常变成事件，改成 on(‘error’) 形式的 API。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;node-1&quot;&gt;node的安装&lt;/h2&gt;
+
+&lt;p&gt;node可以去官网下载安装包这个就不多说了，安装完node之后可以通过 &lt;code&gt;node -v&lt;/code&gt; 查看当前版本号。安装express的话，如何是4.0的版本最好使用 &lt;code&gt;npm install -g express-generator&lt;/code&gt; 安装。
+这里的 &lt;code&gt;-g&lt;/code&gt; 是全局global的意思，一般来说还是全局安装的好，因为安装的时候已经帮你配置好了系统的环境变量。&lt;/p&gt;
+
+&lt;h2 id=&quot;packagejson&quot;&gt;关于package.json&lt;/h2&gt;
+
+&lt;p&gt;package.json的代码通常是这样的&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;helloexpress&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+    &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dependencies&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;  
+      &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;“&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;  
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;看起来跟普通的json没什么区别，但是在这里区别却很大。 dependencies是所需要安装的node模块，通常在项目根目录建立，也可以通过命令 &lt;code&gt;npm init&lt;/code&gt;来建立。当有package.json存在的时候，就可以通过&lt;code&gt;npm install&lt;/code&gt;来安装所需要的依赖模块。是不是很方便呢！&lt;/p&gt;
+
+&lt;h2 id=&quot;appjs&quot;&gt;重头戏app.js&lt;/h2&gt;
+
+&lt;p&gt;直接贴代码&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+ &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  
+    
+ &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+   &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hello&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;express&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+ &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;  
+    
+ &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;如上所示就是app.js的代码了，当执行&lt;code&gt;node app.js&lt;/code&gt;的时候，俺们就能在浏览器的地址栏输入http://127.0.0.1:3000/ 来看到我们的效果 hello express，这是node的重点，这段代码
+就是在起了一个本地服务器，hah，（为什么不是传统的hello world呢，因为俺不识字）&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/node-express/&quot;&gt;node express初学&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 25, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
 <entry>
@@ -20,7 +93,7 @@
   <published>2015-09-16T00:00:00-04:00</published>
   <updated>2015-09-16T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -574,7 +647,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;https://github.com/huangxok&quot;&gt; https://github.com/huangxok&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/mui-react/&quot;&gt;react mbe_ui浅析&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/mui-react/&quot;&gt;react mbe_ui浅析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -586,7 +659,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-09-13T00:00:00-04:00</published>
   <updated>2015-09-13T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -667,7 +740,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;本文原创&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/ng-todoList/&quot;&gt;第一次接触ng todoList，产出物&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on September 13, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/ng-todoList/&quot;&gt;第一次接触ng todoList，产出物&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 13, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -679,7 +752,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-09-12T00:00:00-04:00</published>
   <updated>2015-09-12T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -1243,7 +1316,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;https://github.com/huangxok&quot;&gt; https://github.com/huangxok&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/promise/&quot;&gt;promise的分析&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on September 12, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/promise/&quot;&gt;promise的分析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 12, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1255,7 +1328,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-08-19T00:00:00-04:00</published>
   <updated>2015-08-19T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -1374,7 +1447,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt; www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/nodeJS-char/&quot;&gt;基于Node.js + socket.io实现WebSocket的聊天DEMO&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 19, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/nodeJS-char/&quot;&gt;基于Node.js + socket.io实现WebSocket的聊天DEMO&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 19, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1386,7 +1459,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-08-17T00:00:00-04:00</published>
   <updated>2015-08-17T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -1520,7 +1593,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/div-center/&quot;&gt;CSS居中完全解决方案&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 17, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/div-center/&quot;&gt;CSS居中完全解决方案&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 17, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1532,7 +1605,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -1766,7 +1839,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;end from &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/html5-javascript-web-dep/&quot;&gt;HTML5和JavaScript Web应用开发读书笔记&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/html5-javascript-web-dep/&quot;&gt;HTML5和JavaScript Web应用开发读书笔记&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1778,7 +1851,7 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -1884,7 +1957,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/how-i-m-using-es6-modules-in-production/&quot;&gt;译-我是怎么在项目中使用ES6模块化的&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/how-i-m-using-es6-modules-in-production/&quot;&gt;译-我是怎么在项目中使用ES6模块化的&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -1896,7 +1969,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -2038,7 +2111,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/frame-animation/&quot;&gt;逐帧动画两种实现方式&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/frame-animation/&quot;&gt;逐帧动画两种实现方式&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -2050,7 +2123,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -2109,7 +2182,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/css-multi-row-overflow/&quot;&gt;小tip:CSS3控制多行溢出&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/css-multi-row-overflow/&quot;&gt;小tip:CSS3控制多行溢出&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -2121,7 +2194,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
-    <name>hackxu's blog</name>
+    <name>2shou's blog</name>
     <uri></uri>
     <email>xhm520g@gmail.com</email>
   </author>
@@ -2166,7 +2239,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/anmi-strange-problem/&quot;&gt;Zepto CSS方法一个奇怪的现象&lt;/a&gt; was originally published by hackxu's blog at &lt;a href=&quot;&quot;&gt;Hackxu's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/anmi-strange-problem/&quot;&gt;Zepto CSS方法一个奇怪的现象&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 

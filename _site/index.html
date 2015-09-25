@@ -5,26 +5,36 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>ME &#8211; Hackxu's Blog</title>
+<title>ME &#8211; 2shou's Blog</title>
 <meta name="description" content="Describe this nonsense.">
 <meta name="keywords" content="Jekyll, theme, themes, responsive, blog, modern">
 
 
 
 <!-- Open Graph -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?bb81ef3608846d9936804b70f1000dcc";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ME">
 <meta property="og:description" content="Describe this nonsense.">
 <meta property="og:url" content="/index.html">
-<meta property="og:site_name" content="Hackxu's Blog">
+<meta property="og:site_name" content="2shou's Blog">
 
 
 
 
 
 <link rel="canonical" href="/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Hackxu's Blog Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="2shou's Blog Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -70,9 +80,9 @@
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="/images/11323966.jpeg" alt="hackxu's blog photo" class="author-photo">
-					<h4>hackxu's blog</h4>
-					<p>hahahah</p>
+					<img src="/images/11323966.jpeg" alt="2shou's blog photo" class="author-photo">
+					<h4>2shou's blog</h4>
+					<p>my own blog；</p>
 				</li>
 				<li><a href="http://www.github.com/hackxu"><span class="btn btn-inverse">Learn More</span></a></li>
 				<li>
@@ -122,8 +132,8 @@
   
   <div class="header-title">
     <div class="header-title-wrap">
-      <h1>Hackxu's Blog</h1>
-      <h2>hackxu的前端技术博客,分享自己的技术心得,积累前段技能,汇聚前端之路的点点滴滴。</h2>
+      <h1>2shou's Blog</h1>
+      <h2>日常，积累，分享，copy</h2>
     </div><!-- /.header-title-wrap -->
   </div><!-- /.header-title -->
 </div><!-- /.entry-header -->
@@ -134,7 +144,42 @@
   <header>
     
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-09-16T00:00:00-04:00"><a href="/mui-react/">September 16, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About hackxu's blog">hackxu's blog</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2015-09-25T00:00:00-04:00"><a href="/node-express/">September 25, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
+      
+      <span class="entry-reading-time">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~1 minute
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="/node-express/" rel="bookmark" title="node express初学" itemprop="url">node express初学</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    
+      <h2 id="node">还是先来扯扯node的优缺点吧</h2>
+
+<h3 id="section">处理高并发场景性能更高</h3>
+
+<p>在用 http://socket.io 之前，推送服务是用 ajax polling 做的。我们用 Tornado 和 Node.js 做过两个版本的推送服务。在当时的测试环境下，Node.js 的 CPU 时间是 Tornado 的三分之一，内存使用是 Tornado 的一半，代码行数只有 Tornado 的三分之一（Node.js 版是用 coffee 写的）。后来我们使用了 http://socket.io，CPU 开销进一步降低。</p>
+
+<h3 id="section-1">函数式编程非常适合写异步回调链</h3>
+
+<p>用 Node.js 配合 CoffeeScript 写异步操作链非常便利，相比之下 Tornado 无论是写命名函数的回调，还是 yield 一个 Task 都没那么自然。</p>
+
+
+      <p><a class="btn btn-info" style="float:right;" href="/node-express/">Read more</a></p>
+    
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    
+    <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2015-09-16T00:00:00-04:00"><a href="/mui-react/">September 16, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">
         <i class="fa fa-clock-o"></i>
@@ -181,7 +226,7 @@
   <header>
     
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-09-13T00:00:00-04:00"><a href="/ng-todoList/">September 13, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About hackxu's blog">hackxu's blog</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2015-09-13T00:00:00-04:00"><a href="/ng-todoList/">September 13, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">
         <i class="fa fa-clock-o"></i>
@@ -217,7 +262,7 @@
   <header>
     
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-09-12T00:00:00-04:00"><a href="/promise/">September 12, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About hackxu's blog">hackxu's blog</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2015-09-12T00:00:00-04:00"><a href="/promise/">September 12, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">
         <i class="fa fa-clock-o"></i>
@@ -255,7 +300,7 @@
   <header>
     
     <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-08-19T00:00:00-04:00"><a href="/nodeJS-char/">August 19, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About hackxu's blog">hackxu's blog</a></span></span>
+      <span class="entry-date date published updated"><time datetime="2015-08-19T00:00:00-04:00"><a href="/nodeJS-char/">August 19, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">
         <i class="fa fa-clock-o"></i>
@@ -293,57 +338,6 @@
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
-<article class="hentry">
-  <header>
-    
-    <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-08-17T00:00:00-04:00"><a href="/div-center/">August 17, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="/about/" title="About hackxu's blog">hackxu's blog</a></span></span>
-      
-      <span class="entry-reading-time">
-        <i class="fa fa-clock-o"></i>
-        
-        Reading time ~1 minute
-      </span><!-- /.entry-reading-time -->
-      
-    </div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="/div-center/" rel="bookmark" title="CSS居中完全解决方案" itemprop="url">CSS居中完全解决方案</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    
-      <blockquote>
-  <p>上次面试面试官问到了，问了个定宽局中和不定宽局中，下来我把所有有关CSS居中都总结了一下</p>
-</blockquote>
-
-<h1 id="section">水平居中</h1>
-
-<h2 id="section-1">行内元素</h2>
-
-<p>把行内元素嵌套在一个DIV中，并且在DIV中设置以下样式</p>
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">a</span><span class="p">{</span>
-		<span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
-	<span class="p">}</span></code></pre></div>
-
-<h2 id="section-2">块级元素</h2>
-
-<p>对于定宽的块级元素，我们要设置起margin-top,margin-right 为auto</p>
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.center</span><span class="p">{</span>
-		<span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="k">auto</span><span class="p">;</span>
-	<span class="p">}</span></code></pre></div>
-
-<h2 id="inline-block">多个块级元素(inline-block)</h2>
-
-<p>多个块级元素，我们将其display设置为inline-block；然后将父级元素设置一下属性</p>
-
-
-      <p><a class="btn btn-info" style="float:right;" href="/div-center/">Read more</a></p>
-    
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
 
 
 <div class="pagination">
@@ -364,6 +358,12 @@
         
       </li>
     
+      <li>
+        
+          <a href="/page3">3</a>
+        
+      </li>
+    
   </ul>
 
   
@@ -375,7 +375,7 @@
 
 <div class="footer-wrapper">
   <footer role="contentinfo">
-    <span>&copy; 2015 hackxu's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
+    <span>&copy; 2015 2shou's blog. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/hpstr-jekyll-theme/" rel="nofollow">HPSTR Theme</a>.</span>
 
 <!-- /*<script type="text/javascript">
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
