@@ -19,6 +19,8 @@ image:
 
 用 Node.js 配合 CoffeeScript 写异步操作链非常便利，相比之下 Tornado 无论是写命名函数的回调，还是 yield 一个 Task 都没那么自然。
 
+<!--more-->
+
 ###缺点：
 
 1. 大量匿名函数使异常栈变得不好看。
@@ -47,7 +49,6 @@ package.json的代码通常是这样的
   }  
 
 {% endhighlight %}
-<!--more-->
 
 看起来跟普通的json没什么区别，但是在这里区别却很大。 dependencies是所需要安装的node模块，通常在项目根目录建立，也可以通过命令 `npm init`来建立。当有package.json存在的时候，就可以通过`npm install`来安装所需要的依赖模块。是不是很方便呢！
 
