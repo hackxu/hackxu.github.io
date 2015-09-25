@@ -9,7 +9,21 @@ image:
   background: witewall_3.png
 ---
 
-闲话不多说来正题
+##还是先来扯扯node的优缺点吧
+
+### 处理高并发场景性能更高
+
+在用 http://socket.io 之前，推送服务是用 ajax polling 做的。我们用 Tornado 和 Node.js 做过两个版本的推送服务。在当时的测试环境下，Node.js 的 CPU 时间是 Tornado 的三分之一，内存使用是 Tornado 的一半，代码行数只有 Tornado 的三分之一（Node.js 版是用 coffee 写的）。后来我们使用了 http://socket.io，CPU 开销进一步降低。
+
+### 函数式编程非常适合写异步回调链
+
+用 Node.js 配合 CoffeeScript 写异步操作链非常便利，相比之下 Tornado 无论是写命名函数的回调，还是 yield 一个 Task 都没那么自然。
+
+###缺点：
+
+1. 大量匿名函数使异常栈变得不好看。
+2. 无法以 request 为单位 catch 异常，必须确保不要在不 catch 异常的第三方库的回调里的抛异常，这在一个异步操作链条里是一件比较麻烦的事。解决方法之一是对那些不 catch 异常的第三方库做一些封装，把所有的异常变成事件，改成 on('error') 形式的 API。
+
 
 ##node的安装
 
