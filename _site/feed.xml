@@ -2,26 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">2shou's Blog</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="/feed.xml" />
-<link rel="alternate" type="text/html" href="" />
-<updated>2015-09-25T08:41:46-04:00</updated>
-<id>/</id>
+<link rel="self" type="application/atom+xml" href="http://www.2shouweb.cn/feed.xml" />
+<link rel="alternate" type="text/html" href="http://www.2shouweb.cn" />
+<updated>2015-10-13T04:32:27-04:00</updated>
+<id>http://www.2shouweb.cn/</id>
 <author>
   <name>2shou's blog</name>
-  <uri>/</uri>
+  <uri>http://www.2shouweb.cn/</uri>
   <email>xhm520g@gmail.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[node express初学]]></title>
- <link rel="alternate" type="text/html" href="/node-express/" />
-  <id>/node-express</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/node-express/" />
+  <id>http://www.2shouweb.cn/node-express</id>
   <published>2015-09-25T00:00:00-04:00</published>
   <updated>2015-09-25T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -81,20 +81,20 @@
 &lt;p&gt;如上所示就是app.js的代码了，当执行&lt;code&gt;node app.js&lt;/code&gt;的时候，俺们就能在浏览器的地址栏输入http://127.0.0.1:3000/ 来看到我们的效果 hello express，这是node的重点，这段代码
 就是在起了一个本地服务器，hah，（为什么不是传统的hello world呢，因为俺不识字）&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/node-express/&quot;&gt;node express初学&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 25, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/node-express/&quot;&gt;node express初学&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on September 25, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[react mbe_ui浅析]]></title>
- <link rel="alternate" type="text/html" href="/mui-react/" />
-  <id>/mui-react</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/mui-react/" />
+  <id>http://www.2shouweb.cn/mui-react</id>
   <published>2015-09-16T00:00:00-04:00</published>
   <updated>2015-09-16T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -647,20 +647,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;https://github.com/huangxok&quot;&gt; https://github.com/huangxok&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/mui-react/&quot;&gt;react mbe_ui浅析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/mui-react/&quot;&gt;react mbe_ui浅析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[第一次接触ng todoList，产出物]]></title>
- <link rel="alternate" type="text/html" href="/ng-todoList/" />
-  <id>/ng-todoList</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/ng-todoList/" />
+  <id>http://www.2shouweb.cn/ng-todoList</id>
   <published>2015-09-13T00:00:00-04:00</published>
   <updated>2015-09-13T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -740,20 +740,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;本文原创&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/ng-todoList/&quot;&gt;第一次接触ng todoList，产出物&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 13, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/ng-todoList/&quot;&gt;第一次接触ng todoList，产出物&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on September 13, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[promise的分析]]></title>
- <link rel="alternate" type="text/html" href="/promise/" />
-  <id>/promise</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/promise/" />
+  <id>http://www.2shouweb.cn/promise</id>
   <published>2015-09-12T00:00:00-04:00</published>
   <updated>2015-09-12T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -1316,20 +1316,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;https://github.com/huangxok&quot;&gt; https://github.com/huangxok&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/promise/&quot;&gt;promise的分析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on September 12, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/promise/&quot;&gt;promise的分析&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on September 12, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[基于Node.js + socket.io实现WebSocket的聊天DEMO]]></title>
- <link rel="alternate" type="text/html" href="/nodeJS-char/" />
-  <id>/nodeJS-char</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/nodeJS-char/" />
+  <id>http://www.2shouweb.cn/nodeJS-char</id>
   <published>2015-08-19T00:00:00-04:00</published>
   <updated>2015-08-19T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -1447,20 +1447,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt; www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/nodeJS-char/&quot;&gt;基于Node.js + socket.io实现WebSocket的聊天DEMO&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 19, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/nodeJS-char/&quot;&gt;基于Node.js + socket.io实现WebSocket的聊天DEMO&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 19, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[CSS居中完全解决方案]]></title>
- <link rel="alternate" type="text/html" href="/div-center/" />
-  <id>/div-center</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/div-center/" />
+  <id>http://www.2shouweb.cn/div-center</id>
   <published>2015-08-17T00:00:00-04:00</published>
   <updated>2015-08-17T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -1593,20 +1593,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/div-center/&quot;&gt;CSS居中完全解决方案&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 17, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/div-center/&quot;&gt;CSS居中完全解决方案&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 17, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[HTML5和JavaScript Web应用开发读书笔记]]></title>
- <link rel="alternate" type="text/html" href="/html5-javascript-web-dep/" />
-  <id>/html5-javascript-web-dep</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/html5-javascript-web-dep/" />
+  <id>http://www.2shouweb.cn/html5-javascript-web-dep</id>
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -1839,20 +1839,20 @@ mbe_ui.Domer 在大多数情况下可以自动推断出合适的命名空间，�
 
 &lt;p&gt;&lt;strong&gt;end from &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/html5-javascript-web-dep/&quot;&gt;HTML5和JavaScript Web应用开发读书笔记&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/html5-javascript-web-dep/&quot;&gt;HTML5和JavaScript Web应用开发读书笔记&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[译-我是怎么在项目中使用ES6模块化的]]></title>
- <link rel="alternate" type="text/html" href="/how-i-m-using-es6-modules-in-production/" />
-  <id>/how-i-m-using-es6-modules-in-production</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/how-i-m-using-es6-modules-in-production/" />
+  <id>http://www.2shouweb.cn/how-i-m-using-es6-modules-in-production</id>
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -1957,20 +1957,20 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/how-i-m-using-es6-modules-in-production/&quot;&gt;译-我是怎么在项目中使用ES6模块化的&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/how-i-m-using-es6-modules-in-production/&quot;&gt;译-我是怎么在项目中使用ES6模块化的&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[逐帧动画两种实现方式]]></title>
- <link rel="alternate" type="text/html" href="/frame-animation/" />
-  <id>/frame-animation</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/frame-animation/" />
+  <id>http://www.2shouweb.cn/frame-animation</id>
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -2111,20 +2111,20 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/frame-animation/&quot;&gt;逐帧动画两种实现方式&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/frame-animation/&quot;&gt;逐帧动画两种实现方式&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[小tip:CSS3控制多行溢出]]></title>
- <link rel="alternate" type="text/html" href="/css-multi-row-overflow/" />
-  <id>/css-multi-row-overflow</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/css-multi-row-overflow/" />
+  <id>http://www.2shouweb.cn/css-multi-row-overflow</id>
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -2182,20 +2182,20 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/css-multi-row-overflow/&quot;&gt;小tip:CSS3控制多行溢出&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/css-multi-row-overflow/&quot;&gt;小tip:CSS3控制多行溢出&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Zepto CSS方法一个奇怪的现象]]></title>
- <link rel="alternate" type="text/html" href="/anmi-strange-problem/" />
-  <id>/anmi-strange-problem</id>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/anmi-strange-problem/" />
+  <id>http://www.2shouweb.cn/anmi-strange-problem</id>
   <published>2015-08-08T00:00:00-04:00</published>
   <updated>2015-08-08T00:00:00-04:00</updated>
   <author>
     <name>2shou's blog</name>
-    <uri></uri>
+    <uri>http://www.2shouweb.cn</uri>
     <email>xhm520g@gmail.com</email>
   </author>
   <content type="html">
@@ -2239,7 +2239,7 @@ Babel完美支持模块化，你可以自己决定你代码的风格，你可以
 
 &lt;p&gt;&lt;strong&gt;文章来自 &lt;a href=&quot;www.hacke2.cn&quot;&gt;www.hacke2.cn&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/anmi-strange-problem/&quot;&gt;Zepto CSS方法一个奇怪的现象&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/anmi-strange-problem/&quot;&gt;Zepto CSS方法一个奇怪的现象&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on August 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
