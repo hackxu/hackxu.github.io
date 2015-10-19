@@ -4,13 +4,168 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://www.2shouweb.cn/feed.xml" />
 <link rel="alternate" type="text/html" href="http://www.2shouweb.cn" />
-<updated>2015-10-13T04:32:27-04:00</updated>
+<updated>2015-10-19T00:24:54-04:00</updated>
 <id>http://www.2shouweb.cn/</id>
 <author>
   <name>2shou's blog</name>
   <uri>http://www.2shouweb.cn/</uri>
   <email>xhm520g@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[AMP 来自 Google 的移动页面优化方案]]></title>
+ <link rel="alternate" type="text/html" href="http://www.2shouweb.cn/AMP/" />
+  <id>http://www.2shouweb.cn/AMP</id>
+  <published>2015-10-19T00:00:00-04:00</published>
+  <updated>2015-10-19T00:00:00-04:00</updated>
+  <author>
+    <name>2shou's blog</name>
+    <uri>http://www.2shouweb.cn</uri>
+    <email>xhm520g@gmail.com</email>
+  </author>
+  <content type="html">
+    &lt;h3 id=&quot;web&quot;&gt;WEB性能优化&lt;/h3&gt;
+
+&lt;p&gt;Web 性能优化（Web Performance Optimization，WPO）是一个老生常谈的话题，我也写过很多关于「性能优化」的文章。最近 Google 某个团队推出了一项名为 Accelerated Mobile Pages（AMP）的技术，号称能大大加快移动端页面呈现速度，提高整体体验。本文就带大家认识一下这项新技术。&lt;/p&gt;
+
+&lt;h3 id=&quot;amp&quot;&gt;AMP介绍&lt;/h3&gt;
+
+&lt;p&gt;Accelerated Mobile Pages（&lt;a href=&quot;https://www.ampproject.org/&quot;&gt;官网&lt;/a&gt;、&lt;a href=&quot;https://github.com/ampproject/amphtml&quot;&gt;GitHub&lt;/a&gt;），直译成中文是「加速的移动页面」的意思。根据官方说明，AMP 在 &lt;a href=&quot;https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/metrics/speed-index&quot;&gt;Speed Index&lt;/a&gt;（首屏展现时间平均值）测试中，性能有 15% ~ 85% 的提升，测试是在模拟 3G 网络环境并模拟 Nexus 5 的条件下完成（&lt;a href=&quot;https://www.ampproject.org/how-it-works/&quot;&gt;详情&lt;/a&gt;）&lt;/p&gt;
+
+&lt;p&gt;AMP 如何让页面性能大幅提升暂且搁置一边，先来看看它是什么。根据官网文档得知，AMP 主要由 AMP HTML、AMP Runtime 以及 AMP Components 三部分组成。&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3 id=&quot;amp-html&quot;&gt;AMP HTML：&lt;/h3&gt;
+
+&lt;p&gt;AMP HTML 是 HTML 的子集，在 AMP HTML 中只允许使用有限的标签。例如 &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt; 这些标签可以直接使用，没有任何限制；有些标签允许有限制的使用，例如 &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; 标签不能使用 &lt;code&gt;http-equiv&lt;/code&gt; 属性；而像 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt; 这样的标签需要替换为 &lt;code&gt;&amp;lt;amp-img&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;amp-audio&amp;gt;&lt;/code&gt; 等 AMP Components；更多的标签如 &lt;code&gt;&amp;lt;frame&amp;gt;&lt;/code&gt;、&lt;code&gt;&amp;lt;form&amp;gt;&lt;/code&gt; 不允许使用。
+完整说明可以查看官网的 &lt;a href=&quot;https://github.com/ampproject/amphtml/blob/master/spec/amp-html-format.md&quot;&gt;AMP HTML 格式文档&lt;/a&gt;。以下是该文档中的 AMP HTML 示例：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;⚡&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Sample document&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;canonical&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;./regular-html-version.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;viewport&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;style &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;amp-custom&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;application/ld+json&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;@context&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://schema.org&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;@type&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;NewsArticle&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;headline&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Article headline&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;image&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&amp;quot;thumbnail1.jpg&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;datePublished&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;2015-02-05T08:00:00+08:00&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;custom-element=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;amp-carousel&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://cdn.ampproject.org/v0/amp-carousel-0.1.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;opacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&amp;lt;noscript&amp;gt;&amp;lt;style&amp;gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;opacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://cdn.ampproject.org/v0.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Sample document&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+  Some text
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;amp-img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;sample.jpg&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/amp-img&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;amp-ad&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;250&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;a9&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data-aax_size=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;300x250&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data-aax_pubname=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;test123&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;data-aax_src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;302&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/amp-ad&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看出，AMP HTML 与普通 HTML 并没有什么太大区别，上面这段代码可以直接存为 .html 文件，并在浏览器中正常运行。下面简单列举一些格式上的要求：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DTD 必须是： &lt;code&gt;&amp;lt;!doctype html&amp;gt;&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;顶层标签必须包含 AMP 属性，如：&lt;code&gt;&amp;lt;html ⚡&amp;gt;&lt;/code&gt; 或  &lt;code&gt;&amp;lt;html amp&amp;gt;&lt;/code&gt;（让其他程序能方便地识别出这是 AMP HTML）；&lt;/li&gt;
+  &lt;li&gt;必须在 HEAD 区域中放置 &lt;code&gt;&amp;lt;link rel=&quot;canonical&quot; href=&quot;$SOME_URL&quot; /&amp;gt;&lt;/code&gt; 标签，用来指定该文档普通版本的 URL；如果只有一个版本，使用当前 URL 即可（告诉搜索引擎，这是同一个页面不同的版本，否则可能会被判作弊）；&lt;/li&gt;
+  &lt;li&gt;必须将 &lt;code&gt;&amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;&lt;/code&gt; 放置在 HEAD 区域最开始的位置（实际上，普通 HTML 也应该这么做）；&lt;/li&gt;
+  &lt;li&gt;必须在 HEAD 区域包含这个ViewPort：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;viewport&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;必须将 &lt;code&gt;&amp;lt;script async src=&quot;https://cdn.ampproject.org/v0.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt; 作为 HEAD 区域最后的元素；&lt;/li&gt;
+  &lt;li&gt;必须在 HEAD 区域包含以下代码：&lt;code&gt;&amp;lt;style&amp;gt;body {opacity: 0}&amp;lt;/style&amp;gt;&amp;lt;noscript&amp;gt;&amp;lt;style&amp;gt;body {opacity: 1}&amp;lt;/style&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;amp-runtime&quot;&gt;AMP Runtime&lt;/h3&gt;
+
+&lt;p&gt;在上面的 AMP HTML 代码中，HEAD 区域最后外链引入的 JS 就是 AMP Runtime。AMP Runtime 提供对自定义元素（Custom Elements）的支持，负责协调资源的加载时机和优先级，以及提供验证器等调试功能。&lt;/p&gt;
+
+&lt;p&gt;访问 AMP HTML 时，在 URL 最后追加 &lt;code&gt;#development=1&lt;/code&gt; 会开启开发者模式。这时 AMP Runtime 会自动加载验证器，并在控制台显示本页不符合 AMP 规范的位置信息。&lt;/p&gt;
+
+&lt;h3 id=&quot;amp-components&quot;&gt;AMP Components&lt;/h3&gt;
+
+&lt;p&gt;AMP Components 是使用浏览器自定义元素（Custom Elements）实现的组件，用来替换 HTML 中默认的 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 和 &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; 等标签，用来实现对资源的自定义加载策略；它也用于实现一些复杂的交互效果，如图片轮播。AMP Components 分为两类：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1.内置组件，包括：amp-img、amp-audio、amp-anim、amp-ad、amp-pixel、amp-video，在 AMP HTML 引入了 AMP Runtime 之后，这些内置组件就可以直接使用。
+
+2.扩展组件，包括：amp-carousel、amp-lightbox、amp-iframe、amp-instagram、amp-twitter、amp-youtube。要使用扩展组件，需要在 AMP HTML 中引入该组件对应的文件。例如要使用 amp-carousel 就必须引入以下文件（必须要有 `async` 和 `custom-element` 属性）：
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;amp-carousel&amp;quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;https://cdn.ampproject.org/v0/amp-carousel-0.1.js&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这里有一个按照 AMP HTML 规范编写的页面，大家可以直接用浏览器打开查看：&lt;a href=&quot;http://qgy18.imququ.com/file/amp.html&quot;&gt;AMP 示例&lt;/a&gt;（注：为了保证国内打开速度，我把 AMP JS 托管在了本地，实际上这么做并不符合规范）。&lt;/p&gt;
+
+&lt;h3 id=&quot;amp-&quot;&gt;AMP 剖析&lt;/h3&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;定位:解决单一问题&lt;/h4&gt;
+
+&lt;p&gt;经过前面对 AMP 的介绍，你一定会感到奇怪，为什么 AMP HTML 有那么多限制和约束，这样阉割后的 HTML 还有什么适用场景。实际上，AMP 只关注于一件事 —— 提高静态页面的性能。&lt;/p&gt;
+
+&lt;p&gt;这个「静态」并不是指没有服务端参与的页面，而是指没有复杂交互、以内容展现为主的资源页，典型例子就是新闻详情页。现在的网站类型很多，游戏类、视频类、电商类等等，每一类网站都有着自己的特点，优化策略也各不相同，用一种方案去解决所有问题不切实际。所以 AMP 项目将关注点放在了更容易优化且效果最明显的内容型页面。&lt;/p&gt;
+
+&lt;h4 id=&quot;web-&quot;&gt;选型：纯 web 技术方案&lt;/h4&gt;
+
+&lt;p&gt;Web 优化有很多种方案，每种方案都有自己的适用范围。有些收益很高的优化手段，存在这样那样的限制：例如针对具体业务逻辑所做的优化，很难通用化；部署 Google 的 &lt;a href=&quot;https://developers.google.com/speed/pagespeed/module/&quot;&gt;PageSpeed&lt;/a&gt; 模块等服务端优化方案，使用成本很高；借助客户端所做的优化，如现在广为流行的移动端 WebView 容器加速方案，优化效果局限在指定 APP 内，甚至还会导致使用通用浏览器访问速度更慢（这个话题很有意思，有机会以后再讨论）。&lt;/p&gt;
+
+&lt;p&gt;以内容为主的新闻详情页，大部分性能消耗在图片、视频等媒体资源以及第三方功能如广告、社会化组件的加载上。将这些内容替换为 AMP Components，避免资源默认被加载，再用 AMP Runtime 统一协调和管理，确实是一个通用化、低使用成本且能让所有浏览器受益的折中方案。而且，AMP 方案不依赖任何特定的服务端或客户端，可以将页面直接托管在 CDN，进一步提高用户访问速度。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;实现：资源调度与控制&lt;/h4&gt;
+
+&lt;p&gt;浏览器对不同资源加载和预加载有自己的策略，对于预加载，我们有一些控制权，但总的看来这一块对于开发者来说还是很不可控。例如浏览器默认会并行加载多张图片，但在屏幕小、网速慢、性能差的手机上，串行由上到下加载图片很可能体验更好。&lt;/p&gt;
+
+&lt;p&gt;移动设备在网络、CPU、内存等方面与 PC 差距很大，很多 PC 上可以忽略的问题，在移动端不得不重视起来。例如我们都知道图片是异步加载的，页面触发 DOMContentLoaded 事件并不需要等图片加载完，但在移动端，大量图片加载带来性能开销却会大幅延后 DOMContentLoaded 时机。以下是我们在某个移动产品中，将图片进行延迟加载处理后的 DOMContentLoaded 时间对比统计，可以看到明显的变化：&lt;/p&gt;
+
+&lt;figure&gt;
+	&lt;a href=&quot;/images/dom-ready-time.png.webp&quot;&gt;
+		&lt;img src=&quot;/images/dom-ready-time.png.webp&quot; alt=&quot;home&quot; /&gt;
+	&lt;/a&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;将图片、视频等标签和第三方功能换成 AMP Components 后，AMP Runtime 可以自动处理延迟加载、按需加载等逻辑，确保页面首屏性能。为了避免延迟加载的资源引发页面抖动，开发者必须给每个 AMP Components 都设置高宽属性，每个 Components 都支持多种 layout 布局，在 &lt;code&gt;responsive&lt;/code&gt; 布局下，组件会根据初始高宽比例自动调整大小。&lt;/p&gt;
+
+&lt;p&gt;另外，一些资源非常消耗性能，例如 gif 和 video，AMP Runtime 可以在它们处于不可见时销毁元素，释放资源。总之，使用了 AMP 方案，相当于将页面资源托管给了 AMP Runtime 管理，一次修改就可以坐享后续所有策略升级带来的性能提升。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;观点：很有借鉴意义&lt;/h4&gt;
+
+&lt;p&gt;本文到这里，差不多快要结束了。经过上面的介绍，大家对 AMP 项目应该有了一定的认识。最后谈谈我的看法：&lt;/p&gt;
+
+&lt;p&gt;AMP 项目对书写代码设置了大量限制，例如所有资源只能托管给 AMP Runtime 加载；不允许使用 AMP Runtime、AMP Components 之外的 JS；不允许使用 inline JS；只能使用有限的 inline CSS 样式；JS 和 Web Font 必须使用指定的 CDN 等等，这都是为后面的优化策略做准备。整体原理并不复杂，难点是配套设施的建立，以及如何说服网站主改造代码。不过，Google 后续很可能对使用了 AMP 的页面提权，这样一来大家就有动力了。&lt;/p&gt;
+
+&lt;p&gt;符合 AMP 规范的页面不会比由 WPO 专家优化后的页面更快，它是一个通用化的技术，肯定包含很多业务用不上的代码逻辑，也有很多优化手段它无法提供。但对于不知道如何 WPO 的网站来说，使用 AMP 则是一个非常不错的选择。&lt;/p&gt;
+
+&lt;p&gt;不过，我认为 AMP 很难直接用在国内项目中。首先，前面说过，AMP Runtime、Components 必须从 &lt;code&gt;cdn.ampproject.org&lt;/code&gt; 加载；Web Font 必须从 &lt;code&gt;fonts.googleapis.com&lt;/code&gt; 加载。这样做的出发点是为了更可控，以及更好的在各网站之间共享缓存，但是这些域名在国内很难访问甚至直接被墙。其次，从目前 AMP 目前已有的扩展组件来看，instagram、twitter、youtube 这类国外媒体常用的服务在国内都无法使用，内置的 ad 组件也不符合国情。&lt;/p&gt;
+
+&lt;p&gt;但是，AMP 项目对我们进行移动 Web 优化仍然很有借鉴意义。实际上，控制资源加载、处理响应式元素避免页面抖动、主动释放资源等策略，我们在项目中都有自己的尝试与经验，但我们的方案要么过分依赖服务端，要么没有抽象成通用模式，导致无法推广到更多产品，这些都是后续可以努力的方向，而 AMP 规范和代码实现，将会是最好的参考资料。&lt;/p&gt;
+
+&lt;p&gt;本文链接:&lt;a href=&quot;https://imququ.com/post/amp-project.html&quot;&gt;https://imququ.com/post/amp-project.html&lt;/a&gt;&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://www.2shouweb.cn/AMP/&quot;&gt;AMP 来自 Google 的移动页面优化方案&lt;/a&gt; was originally published by 2shou's blog at &lt;a href=&quot;http://www.2shouweb.cn&quot;&gt;2shou's Blog&lt;/a&gt; on October 19, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
 <entry>

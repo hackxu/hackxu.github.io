@@ -143,6 +143,43 @@
   <header>
     
     <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2015-08-08T00:00:00-04:00"><a href="http://www.2shouweb.cn/css-multi-row-overflow/">August 08, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://www.2shouweb.cn/about/" title="About 2shou's blog">2shou's blog</a></span></span>
+      
+      <span class="entry-reading-time">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~1 minute
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://www.2shouweb.cn/css-multi-row-overflow/" rel="bookmark" title="小tip:CSS3控制多行溢出" itemprop="url">小tip:CSS3控制多行溢出</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    
+      <blockquote>
+  <p>以前做项目，对文字溢出只能进行单行溢出的控制：</p>
+</blockquote>
+
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">white-space</span><span class="o">:</span> <span class="nt">nowrap</span><span class="o">;</span>  
+<span class="nt">overflow</span><span class="o">:</span> <span class="nt">hidden</span><span class="o">;</span>  
+<span class="nt">text-overflow</span><span class="o">:</span> <span class="nt">ellipsis</span><span class="o">;</span></code></pre></div>
+
+<p>对于多行则无能为力，只能用渲染端来控制，这样有一个很大的问题：<strong>无法达到响应式</strong></p>
+
+<p>但是在WebKit浏览器或移动端（绝大部分是WebKit内核的浏览器）的页面实现比较简单，可以直接使用WebKit的CSS扩展属性(WebKit是私有属性)-webkit-line-clamp，这个历史问题也就不攻自破了,对应代码：</p>
+
+
+      <p><a class="btn btn-info" style="float:right;" href="/css-multi-row-overflow/">Read more</a></p>
+    
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    
+    <div class="entry-meta">
       <span class="entry-date date published updated"><time datetime="2015-08-08T00:00:00-04:00"><a href="http://www.2shouweb.cn/anmi-strange-problem/">August 08, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://www.2shouweb.cn/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">

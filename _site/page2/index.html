@@ -143,6 +143,48 @@
   <header>
     
     <div class="entry-meta">
+      <span class="entry-date date published updated"><time datetime="2015-08-19T00:00:00-04:00"><a href="http://www.2shouweb.cn/nodeJS-char/">August 19, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://www.2shouweb.cn/about/" title="About 2shou's blog">2shou's blog</a></span></span>
+      
+      <span class="entry-reading-time">
+        <i class="fa fa-clock-o"></i>
+        
+        Reading time ~2 minutes
+      </span><!-- /.entry-reading-time -->
+      
+    </div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://www.2shouweb.cn/nodeJS-char/" rel="bookmark" title="基于Node.js + socket.io实现WebSocket的聊天DEMO" itemprop="url">基于Node.js + socket.io实现WebSocket的聊天DEMO</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    
+      <h1 id="section">简介</h1>
+
+<p>最近看Node.js和HTML5，练手了一个简易版的聊天DEMO，娱乐一下</p>
+
+<h2 id="socketio">为什么需要socket.io？</h2>
+
+<p>node.js提供了高效的服务端运行环境，但是由于浏览器端对HTML5的支持不一，
+为了兼容所有浏览器，提供卓越的实时的用户体验，并且为程序员提供客户端与服务端一致的编程体验，
+于是socket.io诞生。</p>
+
+<pre><code>简答来说socket.io具体以下特点：
+
+1.socket.io设计的目标是支持任何的浏览器，任何Mobile设备。目前支持主流的PC浏览器 (IE,Safari,Chrome,Firefox,Opera等)，Mobile浏览器(iphone Safari/ipad Safari/android WebKit/WebOS WebKit等)。socket.io基于node.js并简化了WebSocket API，统一了通信的API。它支持：WebSocket, Flash Socket, AJAX long-polling, AJAX multipart streaming, Forever IFrame, JSONP polling。
+
+2.socket.io解决了实时的通信问题，并统一了服务端与客户端的编程方式。启动了socket以后，就像建立了一条客户端与服务端的管道，两边可以互通有无。
+</code></pre>
+
+
+      <p><a class="btn btn-info" style="float:right;" href="/nodeJS-char/">Read more</a></p>
+    
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    
+    <div class="entry-meta">
       <span class="entry-date date published updated"><time datetime="2015-08-17T00:00:00-04:00"><a href="http://www.2shouweb.cn/div-center/">August 17, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://www.2shouweb.cn/about/" title="About 2shou's blog">2shou's blog</a></span></span>
       
       <span class="entry-reading-time">
@@ -280,43 +322,6 @@
 
 
       <p><a class="btn btn-info" style="float:right;" href="/frame-animation/">Read more</a></p>
-    
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    
-    <div class="entry-meta">
-      <span class="entry-date date published updated"><time datetime="2015-08-08T00:00:00-04:00"><a href="http://www.2shouweb.cn/css-multi-row-overflow/">August 08, 2015</a></time></span><span class="author vcard"><span class="fn"><a href="http://www.2shouweb.cn/about/" title="About 2shou's blog">2shou's blog</a></span></span>
-      
-      <span class="entry-reading-time">
-        <i class="fa fa-clock-o"></i>
-        
-        Reading time ~1 minute
-      </span><!-- /.entry-reading-time -->
-      
-    </div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://www.2shouweb.cn/css-multi-row-overflow/" rel="bookmark" title="小tip:CSS3控制多行溢出" itemprop="url">小tip:CSS3控制多行溢出</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    
-      <blockquote>
-  <p>以前做项目，对文字溢出只能进行单行溢出的控制：</p>
-</blockquote>
-
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">white-space</span><span class="o">:</span> <span class="nt">nowrap</span><span class="o">;</span>  
-<span class="nt">overflow</span><span class="o">:</span> <span class="nt">hidden</span><span class="o">;</span>  
-<span class="nt">text-overflow</span><span class="o">:</span> <span class="nt">ellipsis</span><span class="o">;</span></code></pre></div>
-
-<p>对于多行则无能为力，只能用渲染端来控制，这样有一个很大的问题：<strong>无法达到响应式</strong></p>
-
-<p>但是在WebKit浏览器或移动端（绝大部分是WebKit内核的浏览器）的页面实现比较简单，可以直接使用WebKit的CSS扩展属性(WebKit是私有属性)-webkit-line-clamp，这个历史问题也就不攻自破了,对应代码：</p>
-
-
-      <p><a class="btn btn-info" style="float:right;" href="/css-multi-row-overflow/">Read more</a></p>
     
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
