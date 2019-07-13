@@ -5,7 +5,7 @@ reading_time:     true
 words_per_minute: 200
 # Your site's domain goes here (eg: //mmistakes.github.io, http://mademistakes.com, etc)
 # When testing locally leave blank or use http://localhost:4000
-url:   http://www.2shouweb.cn
+url:   https://hackxu.github.io
 kkurl:     http://www.github.com/hackxu
 kurl: "https://github.com/huangxok" # the base hostname & protocol for your site
 kurl1: "https://github.com/huangxok/mygitnote/tree/master/mbeui-react" # the base hostname & protocol for your site
